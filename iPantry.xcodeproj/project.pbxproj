@@ -11,6 +11,9 @@
 		2C7AC6B62C6187E5009E2388 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7AC6B52C6187E5009E2388 /* ContentView.swift */; };
 		2C7AC6B82C6187E6009E2388 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C7AC6B72C6187E6009E2388 /* Assets.xcassets */; };
 		2C7AC6BB2C6187E6009E2388 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C7AC6BA2C6187E6009E2388 /* Preview Assets.xcassets */; };
+		2C7AC6C22C61883D009E2388 /* PantryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7AC6C12C61883D009E2388 /* PantryView.swift */; };
+		2C7AC6C42C618A03009E2388 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7AC6C32C618A03009E2388 /* Item.swift */; };
+		2C7AC6C62C61AAD8009E2388 /* ItemRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7AC6C52C61AAD8009E2388 /* ItemRowView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +22,9 @@
 		2C7AC6B52C6187E5009E2388 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		2C7AC6B72C6187E6009E2388 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2C7AC6BA2C6187E6009E2388 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		2C7AC6C12C61883D009E2388 /* PantryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PantryView.swift; sourceTree = "<group>"; };
+		2C7AC6C32C618A03009E2388 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
+		2C7AC6C52C61AAD8009E2388 /* ItemRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemRowView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +59,9 @@
 			children = (
 				2C7AC6B32C6187E5009E2388 /* iPantryApp.swift */,
 				2C7AC6B52C6187E5009E2388 /* ContentView.swift */,
+				2C7AC6C12C61883D009E2388 /* PantryView.swift */,
+				2C7AC6C52C61AAD8009E2388 /* ItemRowView.swift */,
+				2C7AC6C32C618A03009E2388 /* Item.swift */,
 				2C7AC6B72C6187E6009E2388 /* Assets.xcassets */,
 				2C7AC6B92C6187E6009E2388 /* Preview Content */,
 			);
@@ -137,8 +146,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C7AC6C42C618A03009E2388 /* Item.swift in Sources */,
+				2C7AC6C22C61883D009E2388 /* PantryView.swift in Sources */,
 				2C7AC6B62C6187E5009E2388 /* ContentView.swift in Sources */,
 				2C7AC6B42C6187E5009E2388 /* iPantryApp.swift in Sources */,
+				2C7AC6C62C61AAD8009E2388 /* ItemRowView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
