@@ -16,11 +16,13 @@ class Item: Identifiable {
 //    var bestByDate: Date?
 //    var shelfLife: Int?
     var emoji: String
+    var daysUntilExpiration: Int
     
-    init(name: String, category: String, emoji: String) {
+    init(name: String, category: String, emoji: String, daysUntilExpiration: Int) {
         self.name = name
         self.category = category
         self.emoji = emoji
+        self.daysUntilExpiration = daysUntilExpiration
     }
 }
 

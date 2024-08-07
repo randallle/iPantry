@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        PantryView()
+        PantryListView(item: Item(name: "Chicken", category: "Poultry", emoji: "🍗", daysUntilExpiration: 10))
     }
 }
 

@@ -9,8 +9,8 @@ import SwiftUI
 
 struct PantryView: View {
     let items: [Item] = [
-        Item(name: "Chicken", category: "Poultry", emoji: "🍗"),
-        Item(name: "Cherries", category: "Fruits", emoji: "🍒")
+        Item(name: "Chicken", category: "Poultry", emoji: "🍗", daysUntilExpiration: 10),
+        Item(name: "Cherries", category: "Fruits", emoji: "🍒", daysUntilExpiration: 10)
     ]
     
     var body: some View {
@@ -73,17 +73,6 @@ struct PantryView: View {
                     }
                 }
             }
-//            VStack {
-//                List {
-//                    ForEach(0..<100) { number in
-//                        NavigationLink {
-//                            Text("Details for item #\(String(number))")
-//                        } label: {
-//                            Text(String(number))
-//                        }
-//                    }
-//                }
-//            }
         }
         .padding()
     }

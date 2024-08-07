@@ -33,6 +33,6 @@ struct ItemRowView: View {
 }
 
 #Preview {
-    let exampleItem = Item(name: "Cherries", category: "Fruits", emoji: "🍒")
+    let exampleItem = Item(name: "Cherries", category: "Fruits", emoji: "🍒", daysUntilExpiration: 10)
     return ItemRowView(item: exampleItem)
 }
