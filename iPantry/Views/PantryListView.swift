@@ -14,9 +14,23 @@ struct PantryListView: View {
     var body: some View {
         NavigationStack {
             CategoriesView()
-//                .padding(.leading, 20)
                 .contentMargins([.leading, .trailing], 20)
+            HStack {
+                Spacer()
+                Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
+                    HStack {
+                        Button("Sort by Best By Date") {}
+                        Image(systemName: "chevron.down")
+                    }
+                })
+            }
+            .font(.callout)
+            .padding(.trailing, 20)
+            .padding(.top, 10)
+            .foregroundColor(.blue)
+            
             List(0..<20) { number in
+                
                 NavigationLink {
                     ItemDetailView(item: item)
                         .navigationTitle(item.name)
@@ -33,9 +47,9 @@ struct PantryListView: View {
                             Text(item.name)
                                 .fontWeight(.semibold)
                                 .lineLimit(1)
-                            Text("Expires in 4 days")
+                            Text("Expires in \(item.daysRemaining!) days")
                                 .font(.caption)
-                                .foregroundColor(item.daysUntilExpiration > 3 ? .secondary : .red)
+                                .foregroundColor(item.daysRemaining! > 3 ? .secondary : .red)
                         }
                     }
                 }
@@ -47,6 +61,11 @@ struct PantryListView: View {
 }
 
 #Preview {
-    let exampleItem = Item(name: "Cherries", category: "Fruits", emoji: "🍒", daysUntilExpiration: 10)
+    let formatter = DateFormatter()
+    formatter.dateFormat = "yyyy-MM-dd"
+    let exampleDate = formatter.date(from: "2024-08-07")!
+    let exampleDate2 = formatter.date(from: "2024-08-26")!
+
+    let exampleItem = Item(name: "Cherries", purchasedDate: exampleDate, category: "Fruits", qualityDate: exampleDate2, emoji: "🍒")
     return PantryListView(item: exampleItem)
 }

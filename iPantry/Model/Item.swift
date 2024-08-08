@@ -7,32 +7,22 @@
 
 import Foundation
 
-class Item: Identifiable {
+struct Item: Identifiable {
     let id = UUID()
     var name: String
-//    var purchasedDate: Date
+    var purchasedDate: Date
     var category: String
-//    var sellByDate: Date?
-//    var bestByDate: Date?
-//    var shelfLife: Int?
+    var dateLabel: String? // best, sell, use, freeze
+    var qualityDate: Date?
     var emoji: String
-    var daysUntilExpiration: Int
+    var freezeDate: Date?
     
-    init(name: String, category: String, emoji: String, daysUntilExpiration: Int) {
-        self.name = name
-        self.category = category
-        self.emoji = emoji
-        self.daysUntilExpiration = daysUntilExpiration
+    // negative value means qualityDate has passed
+    var daysRemaining: Int? {
+        if let date = qualityDate {
+            return Calendar.current.dateComponents([.day], from: .now, to: date).day
+        }
+        
+        return nil
     }
 }
-
-//- [ ] item name
-//- [ ] purchased date
-//- [ ] category
-//- [ ] sell by/best buy date
-//- [ ] freeze date
-//- [ ] shelf life (auto populated or entered by user)
-//- [ ] location
-//- [ ] refrigerated
-//- [ ] barcode feature
-

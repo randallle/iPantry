@@ -1,0 +1,213 @@
+[
+	{
+		"name": "chicken",
+		"purchasedDate": "2024-08-07",
+		"category": "meats",
+		"dateLabel": "freeze",
+		"qualityDate": "2024-08-12",
+		"emoji": "🍗"
+	},
+	{
+		"name": "apple",
+		"purchasedDate": "2024-08-06",
+		"category": "fruits",
+		"dateLabel": "best",
+		"qualityDate": "2024-08-20",
+		"emoji": "🍎"
+	},
+	{
+		"name": "flour",
+		"purchasedDate": "2024-08-05",
+		"category": "baking",
+		"emoji": "🌾"
+	},
+	{
+		"name": "carrot",
+		"purchasedDate": "2024-08-04",
+		"category": "vegetables",
+		"dateLabel": "sell",
+		"qualityDate": "2024-08-14",
+		"emoji": "🥕"
+	},
+	{
+		"name": "bread",
+		"purchasedDate": "2024-08-03",
+		"category": "grains",
+		"dateLabel": "use",
+		"qualityDate": "2024-08-10",
+		"emoji": "🍞",
+		"freezeDate": "2024-08-12"
+	},
+	{
+		"name": "milk",
+		"purchasedDate": "2024-08-02",
+		"category": "dairy",
+		"dateLabel": "sell",
+		"qualityDate": "2024-08-08",
+		"emoji": "🥛"
+	},
+	{
+		"name": "strawberry",
+		"purchasedDate": "2024-08-01",
+		"category": "fruits",
+		"dateLabel": "best",
+		"qualityDate": "2024-08-05",
+		"emoji": "🍓",
+		"freezeDate": "2024-08-06"
+	},
+	{
+		"name": "fish",
+		"purchasedDate": "2024-07-31",
+		"category": "meats",
+		"dateLabel": "freeze",
+		"qualityDate": "2024-08-05",
+		"emoji": "🐟",
+		"freezeDate": "2024-08-07"
+	},
+	{
+		"name": "banana",
+		"purchasedDate": "2024-07-30",
+		"category": "fruits",
+		"dateLabel": "best",
+		"qualityDate": "2024-08-10",
+		"emoji": "🍌"
+	},
+	{
+		"name": "egg",
+		"purchasedDate": "2024-07-29",
+		"category": "dairy",
+		"dateLabel": "use",
+		"qualityDate": "2024-08-09",
+		"emoji": "🥚"
+	},
+	{
+		"name": "orange",
+		"purchasedDate": "2024-07-28",
+		"category": "fruits",
+		"dateLabel": "best",
+		"qualityDate": "2024-08-07",
+		"emoji": "🍊"
+	},
+	{
+		"name": "lettuce",
+		"purchasedDate": "2024-07-27",
+		"category": "vegetables",
+		"dateLabel": "sell",
+		"qualityDate": "2024-08-05",
+		"emoji": "🥬"
+	},
+	{
+		"name": "beef",
+		"purchasedDate": "2024-07-26",
+		"category": "meats",
+		"dateLabel": "freeze",
+		"qualityDate": "2024-08-10",
+		"emoji": "🥩",
+		"freezeDate": "2024-08-12"
+	},
+	{
+		"name": "yogurt",
+		"purchasedDate": "2024-07-25",
+		"category": "dairy",
+		"dateLabel": "sell",
+		"qualityDate": "2024-08-03",
+		"emoji": "🥣"
+	},
+	{
+		"name": "tomato",
+		"purchasedDate": "2024-07-24",
+		"category": "vegetables",
+		"dateLabel": "best",
+		"qualityDate": "2024-08-01",
+		"emoji": "🍅"
+	},
+	{
+		"name": "cheese",
+		"purchasedDate": "2024-07-23",
+		"category": "dairy",
+		"dateLabel": "use",
+		"qualityDate": "2024-08-05",
+		"emoji": "🧀",
+		"freezeDate": "2024-08-08"
+	},
+	{
+		"name": "onion",
+		"purchasedDate": "2024-07-22",
+		"category": "vegetables",
+		"dateLabel": "sell",
+		"qualityDate": "2024-08-15",
+		"emoji": "🧅"
+	},
+	{
+		"name": "butter",
+		"purchasedDate": "2024-07-21",
+		"category": "dairy",
+		"emoji": "🧈",
+		"freezeDate": "2024-08-10"
+	},
+	{
+		"name": "grape",
+		"purchasedDate": "2024-07-20",
+		"category": "fruits",
+		"dateLabel": "best",
+		"qualityDate": "2024-08-02",
+		"emoji": "🍇"
+	},
+	{
+		"name": "pork",
+		"purchasedDate": "2024-07-19",
+		"category": "meats",
+		"dateLabel": "freeze",
+		"qualityDate": "2024-08-03",
+		"emoji": "🐖",
+		"freezeDate": "2024-08-05"
+	},
+	{
+		"name": "avocado",
+		"purchasedDate": "2024-07-18",
+		"category": "fruits",
+		"dateLabel": "best",
+		"qualityDate": "2024-07-28",
+		"emoji": "🥑"
+	},
+	{
+		"name": "potato",
+		"purchasedDate": "2024-07-17",
+		"category": "vegetables",
+		"dateLabel": "sell",
+		"qualityDate": "2024-08-25",
+		"emoji": "🥔"
+	},
+	{
+		"name": "mushroom",
+		"purchasedDate": "2024-07-16",
+		"category": "vegetables",
+		"dateLabel": "use",
+		"qualityDate": "2024-07-22",
+		"emoji": "🍄"
+	},
+	{
+		"name": "blueberry",
+		"purchasedDate": "2024-07-15",
+		"category": "fruits",
+		"dateLabel": "best",
+		"qualityDate": "2024-07-25",
+		"emoji": "🫐"
+	},
+	{
+		"name": "broccoli",
+		"purchasedDate": "2024-07-14",
+		"category": "vegetables",
+		"dateLabel": "sell",
+		"qualityDate": "2024-07-21",
+		"emoji": "🥦"
+	},
+	{
+		"name": "spinach",
+		"purchasedDate": "2024-07-13",
+		"category": "vegetables",
+		"dateLabel": "use",
+		"qualityDate": "2024-07-19",
+		"emoji": "🌿"
+	}
+]

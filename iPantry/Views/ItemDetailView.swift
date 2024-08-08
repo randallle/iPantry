@@ -17,6 +17,10 @@ struct ItemDetailView: View {
 }
 
 #Preview {
-    let exampleItem = Item(name: "Cherries", category: "Fruits", emoji: "🍒", daysUntilExpiration: 10)
+    let formatter = DateFormatter()
+    formatter.dateFormat = "yyyy-MM-dd"
+    let exampleDate = formatter.date(from: "2024-08-07")!
+    
+    let exampleItem = Item(name: "Cherries", purchasedDate: exampleDate, category: "Fruits", emoji: "🍒")
     return ItemDetailView(item: exampleItem)
 }
