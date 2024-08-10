@@ -58,7 +58,7 @@ struct ItemDetailView: View {
                         }
                     }
                     if dateLabel != "None" {
-                        DatePicker("\(dateLabel) Date", selection: $purchasedDate, displayedComponents: .date)
+                        DatePicker("\(dateLabel) Date", selection: $qualityDate, displayedComponents: .date)
                     }
                 }
                 
