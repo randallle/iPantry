@@ -16,12 +16,13 @@ struct ItemDetailView: View {
     @State private var notes = ""
     @Binding var isPresented: Bool
     
-    let categories: [String] = ["Fruits", "Poultry", "Vegetables", "Baking"]
+    let categories: [String] = ["None", "Fruits", "Poultry", "Vegetables", "Baking"]
     let dateLabels: [String] = ["None", "Best By", "Sell By", "Use By", "Freeze By"]
     
-//    init() {
-//        UITextField.appearance().clearButtonMode = .whileEditing
-//    }
+    init(isPresented: Binding<Bool>) {
+        self._isPresented = isPresented
+        UITextField.appearance().clearButtonMode = .whileEditing
+    }
     
     var body: some View {
         NavigationStack {
@@ -31,11 +32,13 @@ struct ItemDetailView: View {
                     
                     Picker("Category", selection: $category) {
                         Section {
-                            Text("None")
+                            Text("None").tag("None")
                         }
                         Section {
                             ForEach(categories, id: \.self) { category in
-                                Text(category)
+                                if category != "None" {
+                                    Text(category)
+                                }
                             }
                         }
                     }
@@ -45,8 +48,13 @@ struct ItemDetailView: View {
                 
                 Section("Quality") {
                     Picker("Date Label", selection: $dateLabel) {
+                        Section {
+                            Text("None").tag("None")
+                        }
                         ForEach(dateLabels, id: \.self) { label in
-                            Text(label)
+                            if label != "None" {
+                                Text(label)
+                            }
                         }
                     }
                     if dateLabel != "None" {
