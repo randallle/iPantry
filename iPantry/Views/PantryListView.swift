@@ -8,8 +8,9 @@
 import SwiftUI
 
 struct PantryListView: View {
-    let item: Item
+    let items: [Item]
     @State private var searchTerm = ""
+    @State private var showingAddSheet = false
     
     var body: some View {
         NavigationStack {
@@ -29,10 +30,10 @@ struct PantryListView: View {
             .padding(.top, 10)
             .foregroundColor(.blue)
             
-            List(0..<20) { number in
+            List(items) { item in
                 
                 NavigationLink {
-                    ItemDetailView(item: item)
+                    ItemDetailView(isPresented: $showingAddSheet)
                         .navigationTitle(item.name)
                         .navigationBarTitleDisplayMode(.inline)
                 } label: {
@@ -55,6 +56,16 @@ struct PantryListView: View {
                 }
             }
             .navigationTitle("My Pantry")
+            .toolbar {
+                ToolbarItem(placement: .primaryAction) {
+                    Button("Add Item", systemImage: "plus") {
+                        showingAddSheet.toggle()
+                    }
+                    .sheet(isPresented: $showingAddSheet) {
+                        ItemDetailView(isPresented: $showingAddSheet)
+                    }
+                }
+            }
             .searchable(text: $searchTerm, placement: .navigationBarDrawer(displayMode: .always), prompt: "Search Pantry")
         }
     }
@@ -67,5 +78,5 @@ struct PantryListView: View {
     let exampleDate2 = formatter.date(from: "2024-08-26")!
 
     let exampleItem = Item(name: "Cherries", purchasedDate: exampleDate, category: "Fruits", qualityDate: exampleDate2, emoji: "🍒")
-    return PantryListView(item: exampleItem)
+    return PantryListView(items: [exampleItem, exampleItem])
 }

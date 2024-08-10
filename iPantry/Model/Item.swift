@@ -6,8 +6,10 @@
 //
 
 import Foundation
+import SwiftData
 
-struct Item: Identifiable {
+@Model
+class Item {
     let id = UUID()
     var name: String
     var purchasedDate: Date
@@ -16,6 +18,7 @@ struct Item: Identifiable {
     var qualityDate: Date?
     var emoji: String
     var freezeDate: Date?
+    var notes: String = ""
     
     // negative value means qualityDate has passed
     var daysRemaining: Int? {
@@ -24,5 +27,15 @@ struct Item: Identifiable {
         }
         
         return nil
+    }
+    
+    init(name: String, purchasedDate: Date, category: String, dateLabel: String? = nil, qualityDate: Date? = nil, emoji: String, freezeDate: Date? = nil) {
+        self.name = name
+        self.purchasedDate = purchasedDate
+        self.category = category
+        self.dateLabel = dateLabel
+        self.qualityDate = qualityDate
+        self.emoji = emoji
+        self.freezeDate = freezeDate
     }
 }

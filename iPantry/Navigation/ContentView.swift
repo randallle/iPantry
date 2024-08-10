@@ -5,6 +5,7 @@
 //  Created by Randall Le on 8/5/24.
 //
 
+import SwiftData
 import SwiftUI
 
 func exampleItem() -> Item {
@@ -17,8 +18,11 @@ func exampleItem() -> Item {
 }
 
 struct ContentView: View {
+    @Environment(\.modelContext) var modelContext
+    @Query var items: [Item]
+    
     var body: some View {
-        PantryListView(item: exampleItem())
+        PantryListView(items: items)
     }
 }
 
