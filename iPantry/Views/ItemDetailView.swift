@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ItemDetailView: View {
     @Environment(\.modelContext) var modelContext
+    @Environment(\.dismiss) var dismiss
     
     @State private var name = ""
     @State private var category = "None"
@@ -16,13 +17,11 @@ struct ItemDetailView: View {
     @State private var dateLabel = "None"
     @State private var qualityDate = Date.now
     @State private var notes = ""
-    @Binding var isPresented: Bool
     
     let categories: [String] = ["None", "Fruits", "Poultry", "Vegetables", "Baking", "Other"]
     let dateLabels: [String] = ["None", "Best By", "Sell By", "Use By", "Freeze By"]
     
-    init(isPresented: Binding<Bool>) {
-        self._isPresented = isPresented
+    init() {
         UITextField.appearance().clearButtonMode = .whileEditing
     }
     
@@ -73,12 +72,11 @@ struct ItemDetailView: View {
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
                     Button("Cancel") {
-                        isPresented = false
+                        dismiss()
                     }
                 }
                 ToolbarItem(placement: .confirmationAction) {
                     Button {
-                        isPresented = false
                         let newItem = Item(
                             name: name,
                             purchasedDate: purchasedDate,
@@ -88,6 +86,7 @@ struct ItemDetailView: View {
                             notes: notes
                         )
                         modelContext.insert(newItem)
+                        dismiss()
                     } label: {
                         Text("Save")
                     }
@@ -105,5 +104,5 @@ struct ItemDetailView: View {
 //    
 //    let exampleItem = Item(name: "Cherries", purchasedDate: exampleDate, category: "Fruits", emoji: "🍒")
 //    return ItemDetailView(item: exampleItem)
-    ItemDetailView(isPresented: .constant(true))
+    ItemDetailView()
 }

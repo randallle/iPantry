@@ -22,7 +22,7 @@ struct ContentView: View {
     @Query var items: [Item]
     
     var body: some View {
-        PantryListView(items: items)
+        PantryListView()
     }
 }
 
