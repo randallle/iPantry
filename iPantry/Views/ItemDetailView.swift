@@ -16,7 +16,7 @@ struct ItemDetailView: View {
     @State private var notes = ""
     @Binding var isPresented: Bool
     
-    let categories: [String] = ["None", "Fruits", "Poultry", "Vegetables", "Baking"]
+    let categories: [String] = ["None", "Fruits", "Poultry", "Vegetables", "Baking", "Other"]
     let dateLabels: [String] = ["None", "Best By", "Sell By", "Use By", "Freeze By"]
     
     init(isPresented: Binding<Bool>) {

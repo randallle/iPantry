@@ -16,6 +16,7 @@
 		2C7AC6CC2C61ED11009E2388 /* ItemDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7AC6CB2C61ED11009E2388 /* ItemDetailView.swift */; };
 		2C7AC6D02C61EF06009E2388 /* CategoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7AC6CF2C61EF06009E2388 /* CategoriesView.swift */; };
 		2C9CAFC42C64A540004DBCCC /* items.json in Resources */ = {isa = PBXBuildFile; fileRef = 2C9CAFC32C64A540004DBCCC /* items.json */; };
+		2C9CAFC62C696BB8004DBCCC /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9CAFC52C696BB8004DBCCC /* Category.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +30,7 @@
 		2C7AC6CB2C61ED11009E2388 /* ItemDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemDetailView.swift; sourceTree = "<group>"; };
 		2C7AC6CF2C61EF06009E2388 /* CategoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesView.swift; sourceTree = "<group>"; };
 		2C9CAFC32C64A540004DBCCC /* items.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = items.json; sourceTree = "<group>"; };
+		2C9CAFC52C696BB8004DBCCC /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +104,7 @@
 			isa = PBXGroup;
 			children = (
 				2C7AC6C32C618A03009E2388 /* Item.swift */,
+				2C9CAFC52C696BB8004DBCCC /* Category.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -183,6 +186,7 @@
 				2C7AC6D02C61EF06009E2388 /* CategoriesView.swift in Sources */,
 				2C7AC6B62C6187E5009E2388 /* ContentView.swift in Sources */,
 				2C7AC6B42C6187E5009E2388 /* iPantryApp.swift in Sources */,
+				2C9CAFC62C696BB8004DBCCC /* Category.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
