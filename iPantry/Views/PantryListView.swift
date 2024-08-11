@@ -77,6 +77,6 @@ struct PantryListView: View {
     let exampleDate = formatter.date(from: "2024-08-07")!
     let exampleDate2 = formatter.date(from: "2024-08-26")!
 
-    let exampleItem = Item(name: "Cherries", purchasedDate: exampleDate, category: "Fruits", qualityDate: exampleDate2)
+    let exampleItem = Item(name: "Cherries", purchasedDate: exampleDate, category: "Fruits", qualityDate: exampleDate2, notes: "")
     return PantryListView(items: [exampleItem, exampleItem])
 }

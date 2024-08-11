@@ -73,15 +73,23 @@ struct ItemDetailView: View {
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
                     Button("Cancel") {
-                        // more code
                         isPresented = false
                     }
                 }
                 ToolbarItem(placement: .confirmationAction) {
-                    Button("Save") {
-                        // more code
+                    Button {
                         isPresented = false
-                        let newItem = Item(name: name, purchasedDate: purchasedDate, category: category)
+                        let newItem = Item(
+                            name: name,
+                            purchasedDate: purchasedDate,
+                            category: category,
+                            dateLabel: dateLabel == "None" ? nil : dateLabel,
+                            qualityDate: dateLabel == "None" ? nil : qualityDate,
+                            notes: notes
+                        )
+                        modelContext.insert(newItem)
+                    } label: {
+                        Text("Save")
                     }
                     .disabled(name.isEmpty || category == "None")
                 }

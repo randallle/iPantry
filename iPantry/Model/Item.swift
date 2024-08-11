@@ -29,12 +29,13 @@ class Item {
         return nil
     }
     
-    init(name: String, purchasedDate: Date, category: String, dateLabel: String? = nil, qualityDate: Date? = nil, freezeDate: Date? = nil) {
+    init(name: String, purchasedDate: Date, category: String, dateLabel: String? = nil, qualityDate: Date? = nil, freezeDate: Date? = nil, notes: String) {
         self.name = name
         self.purchasedDate = purchasedDate
         self.category = category
         self.dateLabel = dateLabel
         self.qualityDate = qualityDate
         self.freezeDate = freezeDate
+        self.notes = notes
     }
 }
