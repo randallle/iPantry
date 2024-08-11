@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct ItemDetailView: View {
+    @Environment(\.modelContext) var modelContext
+    
     @State private var name = ""
     @State private var category = "None"
     @State private var purchasedDate = Date.now
@@ -79,8 +81,9 @@ struct ItemDetailView: View {
                     Button("Save") {
                         // more code
                         isPresented = false
+                        let newItem = Item(name: name, purchasedDate: purchasedDate, category: category)
                     }
-                    .disabled(name.isEmpty)
+                    .disabled(name.isEmpty || category == "None")
                 }
             }
         }

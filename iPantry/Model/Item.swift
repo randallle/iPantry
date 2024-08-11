@@ -16,7 +16,7 @@ class Item {
     var category: String
     var dateLabel: String? // best, sell, use, freeze
     var qualityDate: Date?
-    var emoji: String
+    var emoji = "🩵"
     var freezeDate: Date?
     var notes: String = ""
     
@@ -29,13 +29,12 @@ class Item {
         return nil
     }
     
-    init(name: String, purchasedDate: Date, category: String, dateLabel: String? = nil, qualityDate: Date? = nil, emoji: String, freezeDate: Date? = nil) {
+    init(name: String, purchasedDate: Date, category: String, dateLabel: String? = nil, qualityDate: Date? = nil, freezeDate: Date? = nil) {
         self.name = name
         self.purchasedDate = purchasedDate
         self.category = category
         self.dateLabel = dateLabel
         self.qualityDate = qualityDate
-        self.emoji = emoji
         self.freezeDate = freezeDate
     }
 }
