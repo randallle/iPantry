@@ -17,31 +17,23 @@ struct CreateCategoryView: View {
     init() {
         UITextField.appearance().clearButtonMode = .whileEditing
     }
-
+    
     var body: some View {
-        NavigationStack {
-            Form {
-                TextField("Category name", text: $newCategory)
-                    .focused($isTextFieldFocused)
-            }
-            .navigationTitle("Create category")
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .cancellationAction) {
-                    Button("Cancel") {
-                        dismiss()
-                    }
+        Form {
+            TextField("Category name", text: $newCategory)
+                .focused($isTextFieldFocused)
+        }
+        .navigationTitle("Create category")
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .confirmationAction) {
+                Button {
+                    // more code
+                    dismiss()
+                } label: {
+                    Text("Save")
                 }
-                
-                ToolbarItem(placement: .confirmationAction) {
-                    Button {
-                        // more code
-                        dismiss()
-                    } label: {
-                        Text("Save")
-                    }
-                    .disabled(newCategory.isEmpty)
-                }
+                .disabled(newCategory.isEmpty)
             }
         }
         .onAppear {

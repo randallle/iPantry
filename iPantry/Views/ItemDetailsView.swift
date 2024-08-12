@@ -22,12 +22,15 @@ struct ItemDetailsView: View {
                 // more code here
                 showingAddCategorySheet.toggle()
             }
-            .sheet(isPresented: $showingAddCategorySheet) {
-                CreateCategoryView()
-            }
+//            .sheet(isPresented: $showingAddCategorySheet) {
+//                CreateCategoryView()
+//            }
         }
         .navigationTitle(item.name)
         .navigationBarTitleDisplayMode(.inline)
+        .navigationDestination(isPresented: $showingAddCategorySheet){
+            CreateCategoryView()
+        }
         .scrollBounceBehavior(.basedOnSize)
         .toolbar {
             ToolbarItem(placement: .primaryAction) {

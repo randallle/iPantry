@@ -58,10 +58,13 @@ struct PantryListView: View {
                 .onDelete(perform: deleteItem)
             }
             .navigationTitle("My Pantry")
-            .navigationDestination(for: Item.self, destination: { item in
+            .navigationDestination(for: Item.self) { item in
                 ItemDetailsView(item: item)
-            })
+            }
             .toolbar {
+                ToolbarItem(placement: .topBarLeading) {
+                    EditButton()
+                }
                 ToolbarItem(placement: .primaryAction) {
                     Button("Add Item", systemImage: "plus") {
                         showingAddSheet.toggle()
