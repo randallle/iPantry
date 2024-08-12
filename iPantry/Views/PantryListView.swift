@@ -55,6 +55,7 @@ struct PantryListView: View {
                         }
                     }
                 }
+                .onDelete(perform: deleteItem)
             }
             .navigationTitle("My Pantry")
             .navigationDestination(for: Item.self, destination: { item in
@@ -71,6 +72,13 @@ struct PantryListView: View {
                 }
             }
             .searchable(text: $searchTerm, placement: .navigationBarDrawer(displayMode: .always), prompt: "Search Pantry")
+        }
+    }
+    
+    func deleteItem(at offsets: IndexSet) {
+        for offset in offsets {
+            let item = items[offset]
+            modelContext.delete(item)
         }
     }
 }

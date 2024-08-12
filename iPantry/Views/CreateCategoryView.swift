@@ -13,6 +13,10 @@ struct CreateCategoryView: View {
     
     @State private var newCategory = ""
     @FocusState private var isTextFieldFocused: Bool
+    
+    init() {
+        UITextField.appearance().clearButtonMode = .whileEditing
+    }
 
     var body: some View {
         NavigationStack {
