@@ -22,9 +22,6 @@ struct ItemDetailsView: View {
                 // more code here
                 showingAddCategorySheet.toggle()
             }
-//            .sheet(isPresented: $showingAddCategorySheet) {
-//                CreateCategoryView()
-//            }
         }
         .navigationTitle(item.name)
         .navigationBarTitleDisplayMode(.inline)
