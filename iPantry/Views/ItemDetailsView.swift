@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ItemDetailView: View {
+struct ItemDetailsView: View {
     @Environment(\.modelContext) var modelContext
     @Environment(\.dismiss) var dismiss
     
@@ -104,5 +104,5 @@ struct ItemDetailView: View {
 //    
 //    let exampleItem = Item(name: "Cherries", purchasedDate: exampleDate, category: "Fruits", emoji: "🍒")
 //    return ItemDetailView(item: exampleItem)
-    ItemDetailView()
+    ItemDetailsView()
 }

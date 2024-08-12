@@ -69,7 +69,7 @@ struct PantryListView: View {
                         showingAddSheet.toggle()
                     }
                     .sheet(isPresented: $showingAddSheet) {
-                        ItemDetailView()
+                        ItemDetailsView()
                     }
                 }
             }
