@@ -11,11 +11,20 @@ import SwiftUI
 struct ItemDetailsView: View {
     let item: Item
     
+    @State private var showingAddCategorySheet = false
+    
     var body: some View {
         ScrollView {
             Text(item.name)
             Text(item.category)
             Text(item.notes)
+            Button("Create category") {
+                // more code here
+                showingAddCategorySheet.toggle()
+            }
+            .sheet(isPresented: $showingAddCategorySheet) {
+                CreateCategoryView()
+            }
         }
         .navigationTitle(item.name)
         .navigationBarTitleDisplayMode(.inline)

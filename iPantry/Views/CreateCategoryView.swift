@@ -5,26 +5,43 @@
 //  Created by Randall Le on 8/11/24.
 //
 
+import SwiftData
 import SwiftUI
 
 struct CreateCategoryView: View {
-    @State private var newCategory = ""
+    @Environment(\.dismiss) var dismiss
     
+    @State private var newCategory = ""
+    @FocusState private var isTextFieldFocused: Bool
+
     var body: some View {
-        Form {
-            TextField("Category name", text: $newCategory)
-        }
-        .navigationTitle("Create category")
-        .navigationBarTitleDisplayMode(.inline)
-        .toolbar {
-            ToolbarItem(placement: .confirmationAction) {
-                Button {
-                    // more code
-                } label: {
-                    Text("Save")
-                }
-                .disabled(newCategory.isEmpty)
+        NavigationStack {
+            Form {
+                TextField("Category name", text: $newCategory)
+                    .focused($isTextFieldFocused)
             }
+            .navigationTitle("Create category")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button("Cancel") {
+                        dismiss()
+                    }
+                }
+                
+                ToolbarItem(placement: .confirmationAction) {
+                    Button {
+                        // more code
+                        dismiss()
+                    } label: {
+                        Text("Save")
+                    }
+                    .disabled(newCategory.isEmpty)
+                }
+            }
+        }
+        .onAppear {
+            isTextFieldFocused = true
         }
     }
 }
