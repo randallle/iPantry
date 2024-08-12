@@ -14,16 +14,39 @@ struct ItemDetailsView: View {
     @State private var showingAddCategorySheet = false
     
     var body: some View {
-        ScrollView {
-            Text(item.name)
-            Text(item.category)
-            Text(item.notes)
-            Button("Create category") {
-                // more code here
-                showingAddCategorySheet.toggle()
+        List {
+            HStack {
+                Text("Item Name")
+                Spacer()
+                Text(item.name)
+                    .foregroundColor(.secondary)
             }
+            HStack {
+                Text("Category")
+                Spacer()
+                Text(item.category)
+                    .foregroundColor(.secondary)
+            }
+            Section {
+                HStack {
+                    Text(item.dateLabel ?? "No label")
+                    Spacer()
+                    Text(item.qualityDate ?? .now, format: .dateTime.day().month().year())
+                        .foregroundColor(.secondary)
+                }
+            } header: {
+                Text("Quality")
+            } footer: {
+                Text("\(item.daysRemaining ?? 0) days remaining")
+            }
+            
+            Section("Notes") {
+                Text(item.notes)
+            }
+            
+            Button("Create Category") { showingAddCategorySheet.toggle() }
         }
-        .navigationTitle(item.name)
+        .navigationTitle("Item Details")
         .navigationBarTitleDisplayMode(.inline)
         .navigationDestination(isPresented: $showingAddCategorySheet){
             CreateCategoryView()
