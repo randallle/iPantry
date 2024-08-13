@@ -20,6 +20,17 @@ struct ItemEditorView: View {
     
     let categories: [String] = ["None", "Fruits", "Poultry", "Vegetables", "Baking", "Other"]
     let dateLabels: [String] = ["None", "Best By", "Sell By", "Use By", "Freeze By"]
+    
+    var changesPresent: Bool {
+        let changes = name == (item?.name ?? "") &&
+        category == (item?.category ?? "None") &&
+        purchasedDate == (item?.purchasedDate ?? Date.now) &&
+        dateLabel == (item?.dateLabel ?? "None") &&
+        qualityDate == (item?.qualityDate ?? Date.now) &&
+        notes == (item?.notes ?? "")
+        return !changes
+    }
+    
     let item: Item?
     
     init(item: Item?) {
@@ -89,7 +100,7 @@ struct ItemEditorView: View {
                     } label: {
                         Text("Save")
                     }
-                    .disabled(name.isEmpty || category == "None")
+                    .disabled(name.isEmpty || category == "None" || !changesPresent)
                 }
             }
         }
