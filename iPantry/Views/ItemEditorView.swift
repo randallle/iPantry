@@ -11,6 +11,8 @@ struct ItemEditorView: View {
     @Environment(\.modelContext) var modelContext
     @Environment(\.dismiss) var dismiss
     
+    @FocusState private var isTextFieldFocused: Bool
+    
     @State private var name = ""
     @State private var category = "None"
     @State private var purchasedDate = Date.now
@@ -43,6 +45,7 @@ struct ItemEditorView: View {
             Form {
                 Section("Details") {
                     TextField("Name", text: $name)
+                        .focused($isTextFieldFocused)
                     
                     Picker("Category", selection: $category) {
                         Section {
@@ -113,25 +116,26 @@ struct ItemEditorView: View {
                 qualityDate = item.qualityDate ?? Date.now
                 notes = item.notes
             }
+            isTextFieldFocused = true
         }
     }
     
     func saveItem() {
         if let item {
-            item.name = name
+            item.name = name.trimmingCharacters(in: .whitespaces)
             item.category = category
             item.purchasedDate = purchasedDate
             item.dateLabel = dateLabel
             item.qualityDate = qualityDate
-            item.notes = notes
+            item.notes = notes.trimmingCharacters(in: .whitespacesAndNewlines)
         } else {
             let newItem = Item(
-                name: name,
+                name: name.trimmingCharacters(in: .whitespaces),
                 purchasedDate: purchasedDate,
                 category: category,
                 dateLabel: dateLabel == "None" ? nil : dateLabel,
                 qualityDate: dateLabel == "None" ? nil : qualityDate,
-                notes: notes
+                notes: notes.trimmingCharacters(in: .whitespacesAndNewlines)
             )
             modelContext.insert(newItem)
         }
