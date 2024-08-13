@@ -20,6 +20,7 @@ struct ManageItemDetailsView: View {
     
     let categories: [String] = ["None", "Fruits", "Poultry", "Vegetables", "Baking", "Other"]
     let dateLabels: [String] = ["None", "Best By", "Sell By", "Use By", "Freeze By"]
+    let item: Item? = nil
     
     init() {
         UITextField.appearance().clearButtonMode = .whileEditing

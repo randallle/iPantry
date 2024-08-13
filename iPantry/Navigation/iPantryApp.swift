@@ -10,13 +10,11 @@ import SwiftUI
 
 @main
 struct iPantryApp: App {
-    let userModelContainer: ModelContainer
-//    let categoryModelContainer: ModelContainer
+    let modelContainer: ModelContainer
     
     init() {
         do {
-            userModelContainer = try ModelContainer(for: Item.self)
-//            categoryModelContainer = try ModelContainer(for: Category.self)
+            modelContainer = try ModelContainer(for: Item.self, Category.self)
         } catch {
             fatalError("Could not initialize ModelContainer")
         }
@@ -26,7 +24,6 @@ struct iPantryApp: App {
         WindowGroup {
             ContentView()
         }
-        .modelContainer(userModelContainer)
-//        .modelContainer(categoryModelContainer)
+        .modelContainer(modelContainer)
     }
 }
