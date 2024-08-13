@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ManageItemDetailsView: View {
+struct ItemEditorView: View {
     @Environment(\.modelContext) var modelContext
     @Environment(\.dismiss) var dismiss
     
@@ -20,10 +20,11 @@ struct ManageItemDetailsView: View {
     
     let categories: [String] = ["None", "Fruits", "Poultry", "Vegetables", "Baking", "Other"]
     let dateLabels: [String] = ["None", "Best By", "Sell By", "Use By", "Freeze By"]
-    let item: Item? = nil
+    let item: Item?
     
-    init() {
+    init(item: Item?) {
         UITextField.appearance().clearButtonMode = .whileEditing
+        self.item = item
     }
     
     var body: some View {
@@ -73,7 +74,7 @@ struct ManageItemDetailsView: View {
                     TextField("Notes", text: $notes,  axis: .vertical)
                 }
             }
-            .navigationTitle("Add Item")
+            .navigationTitle("\(item == nil ? "Add" : "Edit") Item")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
@@ -83,15 +84,7 @@ struct ManageItemDetailsView: View {
                 }
                 ToolbarItem(placement: .confirmationAction) {
                     Button {
-                        let newItem = Item(
-                            name: name,
-                            purchasedDate: purchasedDate,
-                            category: category,
-                            dateLabel: dateLabel == "None" ? nil : dateLabel,
-                            qualityDate: dateLabel == "None" ? nil : qualityDate,
-                            notes: notes
-                        )
-                        modelContext.insert(newItem)
+                        saveItem()
                         dismiss()
                     } label: {
                         Text("Save")
@@ -100,15 +93,45 @@ struct ManageItemDetailsView: View {
                 }
             }
         }
+        .onAppear {
+            if let item {
+                name = item.name
+                category = item.category
+                purchasedDate = item.purchasedDate
+                dateLabel = item.dateLabel ?? "None"
+                qualityDate = item.qualityDate ?? Date.now
+                notes = item.notes
+            }
+        }
+    }
+    
+    func saveItem() {
+        if let item {
+            item.name = name
+            item.category = category
+            item.purchasedDate = purchasedDate
+            item.dateLabel = dateLabel
+            item.qualityDate = qualityDate
+            item.notes = notes
+        } else {
+            let newItem = Item(
+                name: name,
+                purchasedDate: purchasedDate,
+                category: category,
+                dateLabel: dateLabel == "None" ? nil : dateLabel,
+                qualityDate: dateLabel == "None" ? nil : qualityDate,
+                notes: notes
+            )
+            modelContext.insert(newItem)
+        }
     }
 }
 
 #Preview {
-    //    let formatter = DateFormatter()
-    //    formatter.dateFormat = "yyyy-MM-dd"
-    //    let exampleDate = formatter.date(from: "2024-08-07")!
-    //
-    //    let exampleItem = Item(name: "Cherries", purchasedDate: exampleDate, category: "Fruits", emoji: "🍒")
-    //    return ItemDetailView(item: exampleItem)
-    ManageItemDetailsView()
+    let formatter = DateFormatter()
+    formatter.dateFormat = "yyyy-MM-dd"
+    let exampleDate = formatter.date(from: "2024-08-07")!
+    
+    let exampleItem = Item(name: "Cherries", purchasedDate: exampleDate, category: "Fruits", notes: "")
+    return ItemEditorView(item: exampleItem)
 }

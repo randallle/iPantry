@@ -12,6 +12,7 @@ struct ItemDetailsView: View {
     let item: Item
     
     @State private var showingAddCategorySheet = false
+    @State private var showingItemEditor = false
     
     var body: some View {
         List {
@@ -55,7 +56,10 @@ struct ItemDetailsView: View {
         .toolbar {
             ToolbarItem(placement: .primaryAction) {
                 Button("Edit") {
-                    // more code here
+                    showingItemEditor.toggle()
+                }
+                .sheet(isPresented: $showingItemEditor) {
+                    ItemEditorView(item: item)
                 }
             }
         }
