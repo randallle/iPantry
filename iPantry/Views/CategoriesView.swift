@@ -11,30 +11,42 @@ import SwiftUI
 struct CategoriesView: View {
     @Environment(\.modelContext) var modelContext
     @Query var categories: [Category]
+
+    @State private var categoryToggles: [Category: Bool] = [:]
     
-//    let categories: [String] = ["All", "Fruits", "Poultry", "Vegetables", "Baking", "+"]
-//    @State private var categoryToggles: [Bool] = [true, false, false, false, false, false]
+    init() {
+        
+    }
     
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack {
-                ForEach(categories) { category in
-                    Text(category.name)
+                ForEach(categories, id: \.self) { category in
+                    Toggle(isOn: Binding(
+                        get: { categoryToggles[category] ?? false},
+                        set: { newValue in
+                            categoryToggles[category] = newValue
+                            category.isSelected = newValue
+                        }
+                    )) {
+                        Text(category.name)
+                    }
+                    .toggleStyle(.button)
+                    .fontWeight(.semibold)
                 }
-                
-//                ForEach(0..<categories.count) { index in
-//                    Toggle(isOn: $categoryToggles[index]) {
-//                        Text(categories[index])
-//                    }
-//                    .toggleStyle(.button)
-//                    .fontWeight(.semibold)
-//                    // create .toggleStyle
-//                }
+            }
+            .onAppear {
+                for category in categories {
+                    categoryToggles[category] = category.isSelected
+                }
             }
         }
     }
 }
 
 #Preview {
-    CategoriesView()
+    let preview = Preview(Category.self)
+    preview.addExamples(Category.categoryMockData)
+    return CategoriesView()
+        .modelContainer(preview.container)
 }
