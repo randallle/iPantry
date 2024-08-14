@@ -9,9 +9,10 @@ import SwiftData
 import SwiftUI
 
 struct CreateCategoryView: View {
+    @Environment(\.modelContext) var modelContext
     @Environment(\.dismiss) var dismiss
     
-    @State private var newCategory = ""
+    @State private var newCategoryName = ""
     @FocusState private var isTextFieldFocused: Bool
     
     init() {
@@ -20,7 +21,7 @@ struct CreateCategoryView: View {
     
     var body: some View {
         Form {
-            TextField("Category name", text: $newCategory)
+            TextField("Category name", text: $newCategoryName)
                 .focused($isTextFieldFocused)
         }
         .navigationTitle("Create category")
@@ -29,11 +30,13 @@ struct CreateCategoryView: View {
             ToolbarItem(placement: .confirmationAction) {
                 Button {
                     // more code
+                    let newCategory = Category(name: newCategoryName, isSelected: false)
+                    modelContext.insert(newCategory)
                     dismiss()
                 } label: {
                     Text("Save")
                 }
-                .disabled(newCategory.isEmpty)
+                .disabled(newCategoryName.isEmpty)
             }
         }
         .onAppear {
