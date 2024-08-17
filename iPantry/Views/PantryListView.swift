@@ -17,22 +17,6 @@ struct PantryListView: View {
     
     var body: some View {
         NavigationStack {
-            CategoriesView()
-                .contentMargins([.leading, .trailing], 20)
-            HStack {
-                Spacer()
-                Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
-                    HStack {
-                        Button("Sort by Best By Date") {}
-                        Image(systemName: "chevron.down")
-                    }
-                })
-            }
-            .font(.callout)
-            .padding(.trailing, 20)
-            .padding(.top, 10)
-            .foregroundColor(.blue)
-            
             List {
                 ForEach(items) { item in
                     NavigationLink(value: item) {
@@ -74,7 +58,7 @@ struct PantryListView: View {
                     }
                 }
             }
-            .searchable(text: $searchTerm, placement: .navigationBarDrawer(displayMode: .always), prompt: "Search Pantry")
+            .searchable(text: $searchTerm, placement: .navigationBarDrawer(displayMode: .automatic), prompt: "Search Pantry")
         }
     }
     
