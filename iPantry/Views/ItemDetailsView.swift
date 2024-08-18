@@ -25,7 +25,7 @@ struct ItemDetailsView: View {
             HStack {
                 Text("Category")
                 Spacer()
-                Text(item.category)
+                Text(item.category?.name ?? "There was an error")
                     .foregroundColor(.secondary)
             }
             Section {
@@ -74,7 +74,7 @@ struct ItemDetailsView: View {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
         let exampleDate = formatter.date(from: "2024-08-07")!
-        let exampleItem = Item(name: "Cherries", purchasedDate: exampleDate, category: "Fruits", notes: "")
+        let exampleItem = Item(name: "Cherries", purchasedDate: exampleDate, category: Category(name: "Fruits"), notes: "")
         return ItemDetailsView(item: exampleItem)
     } catch {
         return Text("Failed to create preview: \(error.localizedDescription)")

@@ -5,27 +5,29 @@
 //  Created by Randall Le on 8/5/24.
 //
 
+import SwiftData
 import SwiftUI
 
 struct ItemEditorView: View {
     @Environment(\.modelContext) var modelContext
     @Environment(\.dismiss) var dismiss
     
+    @Query var categories: [Category]
+    
     @FocusState private var isTextFieldFocused: Bool
     
-    @State private var name = ""
-    @State private var category = "None"
-    @State private var purchasedDate = Date.now
-    @State private var dateLabel = "None"
-    @State private var qualityDate = Date.now
-    @State private var notes = ""
+    @State private var name: String
+    @State private var category: Category?
+    @State private var purchasedDate: Date
+    @State private var dateLabel: String
+    @State private var qualityDate: Date
+    @State private var notes: String
     
-    let categories: [String] = ["None", "Fruits", "Poultry", "Vegetables", "Baking", "Other"]
     let dateLabels: [String] = ["None", "Best By", "Sell By", "Use By", "Freeze By"]
     
     var changesPresent: Bool {
         let changes = name == (item?.name ?? "") &&
-        category == (item?.category ?? "None") &&
+        category == (item?.category) &&
         purchasedDate == (item?.purchasedDate ?? Date.now) &&
         dateLabel == (item?.dateLabel ?? "None") &&
         qualityDate == (item?.qualityDate ?? Date.now) &&
@@ -38,6 +40,13 @@ struct ItemEditorView: View {
     init(item: Item?) {
         UITextField.appearance().clearButtonMode = .whileEditing
         self.item = item
+        
+        _name = State(initialValue: item?.name ?? "")
+        _category = State(initialValue: item?.category ?? Category(name: "None"))
+        _purchasedDate = State(initialValue: item?.purchasedDate ?? .now)
+        _dateLabel = State(initialValue: item?.dateLabel ?? "None")
+        _qualityDate = State(initialValue: item?.qualityDate ?? .now)
+        _notes = State(initialValue: item?.notes ?? "")
     }
     
     var body: some View {
@@ -48,15 +57,17 @@ struct ItemEditorView: View {
                         .focused($isTextFieldFocused)
                     
                     Picker("Category", selection: $category) {
-                        Section {
-                            Text("None").tag("None")
+                        // Section for "None"
+                        if let noneCategory = categories.first(where: { $0.name == "None" }) {
+                            Section {
+                                Text(noneCategory.name).tag(noneCategory as Category?)
+                            }
                         }
                         
+                        // Section for other categories excluding "None" and "All"
                         Section {
-                            ForEach(categories, id: \.self) { category in
-                                if category != "None" {
-                                    Text(category)
-                                }
+                            ForEach(categories.filter { $0.name != "None" && $0.name != "All" }, id: \.self) { category in
+                                Text(category.name).tag(category as Category?)
                             }
                         }
                         
@@ -103,19 +114,11 @@ struct ItemEditorView: View {
                     } label: {
                         Text("Save")
                     }
-                    .disabled(name.isEmpty || category == "None" || !changesPresent)
+                    .disabled(name.isEmpty || category?.name == "None" || !changesPresent)
                 }
             }
         }
         .onAppear {
-            if let item {
-                name = item.name
-                category = item.category
-                purchasedDate = item.purchasedDate
-                dateLabel = item.dateLabel ?? "None"
-                qualityDate = item.qualityDate ?? Date.now
-                notes = item.notes
-            }
             isTextFieldFocused = true
         }
     }
@@ -146,7 +149,9 @@ struct ItemEditorView: View {
     let formatter = DateFormatter()
     formatter.dateFormat = "yyyy-MM-dd"
     let exampleDate = formatter.date(from: "2024-08-07")!
+    let exampleCategory = Category(name: "Fruits")
+    let exampleItem = Item(name: "Cherries", purchasedDate: exampleDate, category: exampleCategory, notes: "Aldi")
     
-    let exampleItem = Item(name: "Cherries", purchasedDate: exampleDate, category: "Fruits", notes: "")
     return ItemEditorView(item: exampleItem)
+        .modelContainer(for: Item.self)
 }

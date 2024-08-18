@@ -21,12 +21,6 @@ struct PantryListView: View {
                 ForEach(items) { item in
                     NavigationLink(value: item) {
                         HStack {
-                            Text(item.emoji)
-                                .font(.system(size: 40))
-                                .frame(width: 60, height: 60)
-                                .background(.gray)
-                                .cornerRadius(10)
-                            
                             VStack(alignment: .leading, spacing: 5) {
                                 Text(item.name)
                                     .fontWeight(.semibold)
@@ -71,12 +65,13 @@ struct PantryListView: View {
 }
 
 #Preview {
-    //    let formatter = DateFormatter()
-    //    formatter.dateFormat = "yyyy-MM-dd"
-    //    let exampleDate = formatter.date(from: "2024-08-07")!
-    //    let exampleDate2 = formatter.date(from: "2024-08-26")!
-    //
-    //    let exampleItem = Item(name: "Cherries", purchasedDate: exampleDate, category: "Fruits", qualityDate: exampleDate2, notes: "")
-    //    return PantryListView(items: [exampleItem, exampleItem])
-    PantryListView()
+    do {
+        let config = ModelConfiguration(isStoredInMemoryOnly: true)
+        let container = try ModelContainer(for: Item.self, configurations: config)
+//        let item = Item(name: "Cherries", purchasedDate: .now, notes: "Aldi")
+        let item = Item(name: "Cherries", purchasedDate: .now, category: nil, notes: "Aldi")
+        return PantryListView()
+    } catch {
+        return Text("Failed to create container: \(error.localizedDescription)")
+    }
 }

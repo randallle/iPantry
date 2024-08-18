@@ -33,12 +33,17 @@ struct iPantryApp: App {
     @MainActor
     private func loadCategories() {
         let context = modelContainer.mainContext
+//        do {
+//            try context.delete(model: Item.self)
+//        } catch {
+//            print(error.localizedDescription)
+//        }
         let request = FetchDescriptor<Category>()
         
         do {
             let categories = try context.fetch(request)
             if categories.isEmpty {
-                let defaultCategories = ["Fruits", "Poultry", "Vegetables", "Baking"]
+                let defaultCategories = ["Fruits", "Poultry", "Vegetables", "Baking", "None"]
                 context.insert(Category(name: "All", isSelected: true))
                 for category in defaultCategories {
                     let newCategory = Category(name: category, isSelected: false)

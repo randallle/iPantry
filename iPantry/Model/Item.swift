@@ -10,14 +10,12 @@ import SwiftData
 
 @Model
 class Item {
-    let id = UUID()
     var name: String
     var purchasedDate: Date
-    var category: String
+    var category: Category?
     var dateLabel: String? // best, sell, use, freeze
     var qualityDate: Date?
-    var emoji = "🩵"
-    var freezeDate: Date?
+//    var freezeDate: Date?
     var notes: String = ""
     
     // negative value means qualityDate has passed
@@ -29,13 +27,13 @@ class Item {
         return nil
     }
     
-    init(name: String, purchasedDate: Date, category: String, dateLabel: String? = nil, qualityDate: Date? = nil, freezeDate: Date? = nil, notes: String) {
+    init(name: String, purchasedDate: Date, category: Category?, dateLabel: String? = nil, qualityDate: Date? = nil, notes: String) {
         self.name = name
         self.purchasedDate = purchasedDate
         self.category = category
         self.dateLabel = dateLabel
         self.qualityDate = qualityDate
-        self.freezeDate = freezeDate
+//        self.freezeDate = freezeDate
         self.notes = notes
     }
 }

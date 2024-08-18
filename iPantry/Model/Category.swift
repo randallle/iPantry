@@ -9,7 +9,7 @@ import Foundation
 import SwiftData
 
 @Model
-class Category {
+class Category: Identifiable, Hashable {
     let id = UUID()
     let name: String
     var isSelected = false
