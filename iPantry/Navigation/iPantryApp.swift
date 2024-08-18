@@ -13,8 +13,13 @@ struct iPantryApp: App {
     let modelContainer: ModelContainer
     
     init() {
+        print(URL.applicationSupportDirectory.path(percentEncoded: false))
+        
+        let schema = Schema([Item.self, Category.self])
+        let config = ModelConfiguration("PantryItems", schema: schema)
+        
         do {
-            modelContainer = try ModelContainer(for: Item.self, Category.self)
+            modelContainer = try ModelContainer(for: schema, configurations: config)
         } catch {
             fatalError("Could not initialize ModelContainer")
         }

@@ -8,7 +8,7 @@
 import Foundation
 
 extension Category {
-    static var categoryMockData: [Category] {
+    static var sampleCategories: [Category] {
         [
             Category(name: "All", isSelected: true),
             Category(name: "Fruit", isSelected: false),

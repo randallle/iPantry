@@ -146,12 +146,8 @@ struct ItemEditorView: View {
 }
 
 #Preview {
-    let formatter = DateFormatter()
-    formatter.dateFormat = "yyyy-MM-dd"
-    let exampleDate = formatter.date(from: "2024-08-07")!
-    let exampleCategory = Category(name: "Fruits")
-    let exampleItem = Item(name: "Cherries", purchasedDate: exampleDate, category: exampleCategory, notes: "Aldi")
-    
-    return ItemEditorView(item: exampleItem)
-        .modelContainer(for: Item.self)
+    let preview = Preview(Item.self, Category.self)
+    preview.addExamples(Category.sampleCategories)
+    return ItemEditorView(item: Item.sampleItems[0])
+        .modelContainer(preview.container)
 }

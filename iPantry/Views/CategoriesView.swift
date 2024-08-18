@@ -46,7 +46,7 @@ struct CategoriesView: View {
 
 #Preview {
     let preview = Preview(Category.self)
-    preview.addExamples(Category.categoryMockData)
+    preview.addExamples(Category.sampleCategories)
     return CategoriesView()
         .modelContainer(preview.container)
 }

@@ -17,23 +17,29 @@ struct PantryListView: View {
     
     var body: some View {
         NavigationStack {
-            List {
-                ForEach(items) { item in
-                    NavigationLink(value: item) {
-                        HStack {
-                            VStack(alignment: .leading, spacing: 5) {
-                                Text(item.name)
-                                    .fontWeight(.semibold)
-                                    .lineLimit(1)
-                                Text(item.daysRemaining != nil ? "Expires in \(item.daysRemaining!) days" : "No expiration provided")
-                                
-                                    .font(.caption)
-                                    .foregroundColor((item.daysRemaining ?? 4) > 3 ? .secondary : .red)
+            Group {
+                if items.isEmpty {
+                    ContentUnavailableView("Add an item.", systemImage: "bag.fill")
+                } else {
+                    List {
+                        ForEach(items) { item in
+                            NavigationLink(value: item) {
+                                HStack {
+                                    VStack(alignment: .leading, spacing: 5) {
+                                        Text(item.name)
+                                            .fontWeight(.semibold)
+                                            .lineLimit(1)
+                                        Text(item.daysRemaining != nil ? "Expires in \(item.daysRemaining!) days" : "No expiration provided")
+                                        
+                                            .font(.caption)
+                                            .foregroundColor((item.daysRemaining ?? 4) > 3 ? .secondary : .red)
+                                    }
+                                }
                             }
                         }
+                        .onDelete(perform: deleteItem)
                     }
                 }
-                .onDelete(perform: deleteItem)
             }
             .navigationTitle("My Pantry")
             .navigationDestination(for: Item.self) { item in
@@ -65,13 +71,9 @@ struct PantryListView: View {
 }
 
 #Preview {
-    do {
-        let config = ModelConfiguration(isStoredInMemoryOnly: true)
-        let container = try ModelContainer(for: Item.self, configurations: config)
-//        let item = Item(name: "Cherries", purchasedDate: .now, notes: "Aldi")
-        let item = Item(name: "Cherries", purchasedDate: .now, category: nil, notes: "Aldi")
-        return PantryListView()
-    } catch {
-        return Text("Failed to create container: \(error.localizedDescription)")
-    }
+    let preview = Preview(Item.self)
+    preview.addExamples(Item.sampleItems)
+    preview.addExamples(Category.sampleCategories)
+    return PantryListView()
+        .modelContainer(preview.container)
 }

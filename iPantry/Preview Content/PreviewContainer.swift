@@ -12,8 +12,8 @@ struct Preview {
     let container: ModelContainer
     
     init(_ models: any PersistentModel.Type...) {
-        let config = ModelConfiguration(isStoredInMemoryOnly: true)
         let schema = Schema(models)
+        let config = ModelConfiguration(isStoredInMemoryOnly: true)
         do {
             container = try ModelContainer(for: schema, configurations: config)
         } catch {
