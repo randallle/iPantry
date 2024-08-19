@@ -17,15 +17,29 @@ struct Preview {
         do {
             container = try ModelContainer(for: schema, configurations: config)
         } catch {
+            print(error.localizedDescription)
             fatalError("Could not create preview container")
         }
     }
     
-    func addExamples(_ examples: [any PersistentModel]) {
-        Task { @MainActor in
-            examples.forEach { example in
-                container.mainContext.insert(example)
-            }
+    @MainActor
+    func addSamples(_ samples: [any PersistentModel]) {
+        samples.forEach { sample in
+            container.mainContext.insert(sample)
+        }
+    }
+    
+    @MainActor
+    func getSamples<T: PersistentModel>(_ model: T.Type) -> [T] {
+        let context = container.mainContext
+        let request = FetchDescriptor<T>()
+        
+        do {
+            let samples = try context.fetch(request)
+            return samples
+        } catch {
+            print("Failed to fetch model: \(error)")
+            return []
         }
     }
 }

@@ -1,21 +1,20 @@
 //
-//  CategoryMockData.swift
+//  ItemSamples.swift
 //  iPantry
 //
-//  Created by Randall Le on 8/13/24.
+//  Created by Randall Le on 8/18/24.
 //
 
 import Foundation
 
 extension Category {
+    static let fruits = Category(name: "Fruits")
+    static let snacks = Category(name: "Snacks")
+    static let poultry = Category(name: "Poultry")
+    static let dairy = Category(name: "Dairy")
+    static let vegetables = Category(name: "Vegetables")
+    
     static var sampleCategories: [Category] {
-        [
-            Category(name: "All", isSelected: true),
-            Category(name: "Fruit", isSelected: false),
-            Category(name: "Poultry", isSelected: false),
-            Category(name: "Vegetables", isSelected: false),
-            Category(name: "Snacks", isSelected: false),
-            Category(name: "Produce", isSelected: false),
-        ]
+        [fruits, snacks, poultry, dairy, vegetables]
     }
 }

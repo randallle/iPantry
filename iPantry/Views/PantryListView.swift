@@ -71,9 +71,11 @@ struct PantryListView: View {
 }
 
 #Preview {
-    let preview = Preview(Item.self)
-    preview.addExamples(Item.sampleItems)
-    preview.addExamples(Category.sampleCategories)
+    let preview = Preview(Item.self, Category.self)
+    preview.addSamples(Category.sampleCategories)
+    preview.addSamples(Item.sampleItems)
+    
+    let myTest = preview.getSamples(Item.self).count
     return PantryListView()
         .modelContainer(preview.container)
 }

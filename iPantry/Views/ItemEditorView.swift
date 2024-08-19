@@ -42,7 +42,7 @@ struct ItemEditorView: View {
         self.item = item
         
         _name = State(initialValue: item?.name ?? "")
-        _category = State(initialValue: item?.category ?? Category(name: "None"))
+        _category = State(initialValue: nil)
         _purchasedDate = State(initialValue: item?.purchasedDate ?? .now)
         _dateLabel = State(initialValue: item?.dateLabel ?? "None")
         _qualityDate = State(initialValue: item?.qualityDate ?? .now)
@@ -58,15 +58,12 @@ struct ItemEditorView: View {
                     
                     Picker("Category", selection: $category) {
                         // Section for "None"
-                        if let noneCategory = categories.first(where: { $0.name == "None" }) {
-                            Section {
-                                Text(noneCategory.name).tag(noneCategory as Category?)
-                            }
+                        Section {
+                            Text("No Selection").tag(nil as Category?)
                         }
                         
-                        // Section for other categories excluding "None" and "All"
                         Section {
-                            ForEach(categories.filter { $0.name != "None" && $0.name != "All" }, id: \.self) { category in
+                            ForEach(categories, id: \.self) { category in
                                 Text(category.name).tag(category as Category?)
                             }
                         }
@@ -114,7 +111,7 @@ struct ItemEditorView: View {
                     } label: {
                         Text("Save")
                     }
-                    .disabled(name.isEmpty || category?.name == "None" || !changesPresent)
+                    .disabled(name.isEmpty || category == nil || !changesPresent)
                 }
             }
         }
@@ -147,7 +144,8 @@ struct ItemEditorView: View {
 
 #Preview {
     let preview = Preview(Item.self, Category.self)
-    preview.addExamples(Category.sampleCategories)
-    return ItemEditorView(item: Item.sampleItems[0])
+    preview.addSamples(Category.sampleCategories)
+    preview.addSamples(Item.sampleItems)
+    return ItemEditorView(item: nil)
         .modelContainer(preview.container)
 }

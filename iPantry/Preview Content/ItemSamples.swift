@@ -14,14 +14,13 @@ extension Item {
         return formatter.date(from: "2024-08-07") ?? .now
     }()
     
-    // create enum of categories that reads from category samples
-    // use it in sampleItems
-    
     static var sampleItems: [Item] {
         [
-            Item(name: "Pears", purchasedDate: .now, category: nil, notes: "Aldi"),
-            Item(name: "Chicken wings", purchasedDate: .now.addingTimeInterval(-86400), category: nil, notes: "Ralphs"),
-            Item(name: "Doritos", purchasedDate: exampleDate, category: nil, notes: "Aldi"),
+            Item(name: "Cherries", purchasedDate: .now, category: Category.fruits, notes: "Ralphs"),
+            Item(name: "Apples", purchasedDate: exampleDate, category: Category.fruits, notes: "Aldi"),
+            Item(name: "Oranges", purchasedDate: exampleDate, category: Category.fruits, notes: "Aldi"),
+            Item(name: "Doritos", purchasedDate: .now.addingTimeInterval(-86400), category: Category.snacks, notes: "Target"),
+            Item(name: "Eggs", purchasedDate: .now.addingTimeInterval(-172800), category: Category.dairy, notes: "2 dozen eggs from Costco")
         ]
     }
 }

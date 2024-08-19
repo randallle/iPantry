@@ -12,10 +12,8 @@ import SwiftData
 class Category: Identifiable, Hashable {
     let id = UUID()
     let name: String
-    var isSelected = false
     
-    init(name: String, isSelected: Bool = false) {
+    init(name: String) {
         self.name = name
-        self.isSelected = isSelected
     }
 }

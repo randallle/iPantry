@@ -30,7 +30,7 @@ struct CreateCategoryView: View {
             ToolbarItem(placement: .confirmationAction) {
                 Button {
                     // more code
-                    let newCategory = Category(name: newCategoryName, isSelected: false)
+                    let newCategory = Category(name: newCategoryName)
                     modelContext.insert(newCategory)
                     dismiss()
                 } label: {

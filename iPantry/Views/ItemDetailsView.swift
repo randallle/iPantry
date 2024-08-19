@@ -67,16 +67,13 @@ struct ItemDetailsView: View {
 }
 
 #Preview {
-    do {
-        let config = ModelConfiguration(isStoredInMemoryOnly: true)
-        let container = try ModelContainer(for: Item.self, configurations: config)
-        
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd"
-        let exampleDate = formatter.date(from: "2024-08-07")!
-        let exampleItem = Item(name: "Cherries", purchasedDate: exampleDate, category: Category(name: "Fruits"), notes: "")
-        return ItemDetailsView(item: exampleItem)
-    } catch {
-        return Text("Failed to create preview: \(error.localizedDescription)")
+    let preview = Preview(Item.self, Category.self)
+    preview.addSamples(Category.sampleCategories)
+    preview.addSamples(Item.sampleItems)
+    
+    let samples = preview.getSamples(Item.self)
+    return NavigationStack {
+        ItemDetailsView(item: samples[0])
+            .modelContainer(preview.container)
     }
 }
