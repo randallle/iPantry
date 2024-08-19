@@ -10,7 +10,6 @@ import SwiftData
 
 @Model
 class Category: Identifiable, Hashable {
-    let id = UUID()
     let name: String
     
     init(name: String) {

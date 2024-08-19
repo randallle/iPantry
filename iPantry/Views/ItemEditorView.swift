@@ -28,9 +28,9 @@ struct ItemEditorView: View {
     var changesPresent: Bool {
         let changes = name == (item?.name ?? "") &&
         category == (item?.category) &&
-        purchasedDate == (item?.purchasedDate ?? Date.now) &&
+        Calendar.current.startOfDay(for: purchasedDate) == (Calendar.current.startOfDay(for: item?.purchasedDate ?? Date.now)) &&
         dateLabel == (item?.dateLabel ?? "None") &&
-        qualityDate == (item?.qualityDate ?? Date.now) &&
+        Calendar.current.startOfDay(for: qualityDate) == (Calendar.current.startOfDay(for: item?.qualityDate ?? Date.now)) &&
         notes == (item?.notes ?? "")
         return !changes
     }
@@ -42,7 +42,7 @@ struct ItemEditorView: View {
         self.item = item
         
         _name = State(initialValue: item?.name ?? "")
-        _category = State(initialValue: nil)
+        _category = State(initialValue: item?.category)
         _purchasedDate = State(initialValue: item?.purchasedDate ?? .now)
         _dateLabel = State(initialValue: item?.dateLabel ?? "None")
         _qualityDate = State(initialValue: item?.qualityDate ?? .now)
@@ -50,6 +50,11 @@ struct ItemEditorView: View {
     }
     
     var body: some View {
+//        Text("\(changesPresent)")
+//        Text("\(qualityDate == (item?.qualityDate ?? Date.now))")
+//        Text("\(qualityDate)")
+//        Text("\(item?.qualityDate ?? .now)")
+        
         NavigationStack {
             Form {
                 Section("Details") {
@@ -146,6 +151,9 @@ struct ItemEditorView: View {
     let preview = Preview(Item.self, Category.self)
     preview.addSamples(Category.sampleCategories)
     preview.addSamples(Item.sampleItems)
-    return ItemEditorView(item: nil)
+    
+    let samples = preview.getSamples(Item.self)
+
+    return ItemEditorView(item: samples[0])
         .modelContainer(preview.container)
 }
