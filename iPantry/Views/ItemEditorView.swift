@@ -50,11 +50,6 @@ struct ItemEditorView: View {
     }
     
     var body: some View {
-//        Text("\(changesPresent)")
-//        Text("\(qualityDate == (item?.qualityDate ?? Date.now))")
-//        Text("\(qualityDate)")
-//        Text("\(item?.qualityDate ?? .now)")
-        
         NavigationStack {
             Form {
                 Section("Details") {
