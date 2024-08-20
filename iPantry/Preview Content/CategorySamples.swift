@@ -13,8 +13,10 @@ extension Category {
     static let poultry = Category(name: "Poultry")
     static let dairy = Category(name: "Dairy")
     static let vegetables = Category(name: "Vegetables")
+    static let baking = Category(name: "Baking")
+    static let grains = Category(name: "Grains")
     
     static var sampleCategories: [Category] {
-        [fruits, snacks, poultry, dairy, vegetables]
+        [fruits, snacks, poultry, dairy, vegetables, baking, grains]
     }
 }

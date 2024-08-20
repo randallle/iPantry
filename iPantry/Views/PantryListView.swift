@@ -41,6 +41,7 @@ struct PantryListView: View {
                     }
                 }
             }
+            .searchable(text: $searchTerm, placement: .navigationBarDrawer, prompt: "Search Pantry")
             .navigationTitle("My Pantry")
             .navigationDestination(for: Item.self) { item in
                 ItemDetailsView(item: item)
@@ -58,7 +59,7 @@ struct PantryListView: View {
                     }
                 }
             }
-            .searchable(text: $searchTerm, placement: .navigationBarDrawer(displayMode: .automatic), prompt: "Search Pantry")
+            
         }
     }
     
@@ -75,7 +76,6 @@ struct PantryListView: View {
     preview.addSamples(Category.sampleCategories)
     preview.addSamples(Item.sampleItems)
     
-    let myTest = preview.getSamples(Item.self).count
     return PantryListView()
         .modelContainer(preview.container)
 }
