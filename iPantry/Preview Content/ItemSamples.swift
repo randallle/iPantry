@@ -35,7 +35,7 @@ extension Item {
             Item(name: "Eggs", purchasedDate: .now.addingTimeInterval(-172800), category: Category.dairy, notes: "2 dozen eggs from Costco"),
             Item(name: "Chicken", purchasedDate: getDate("2024-08-07"), category: Category.poultry, dateLabel: "Freeze", qualityDate: getDate("2024-08-1"), notes: ""),
             Item(name: "Flour", purchasedDate: getDate("2024-08-07"), category: Category.poultry, dateLabel: "Best By", qualityDate: getDate("2025-08-1"), notes: ""),
-            Item(name: "Carrot", purchasedDate: getDate("2024-08-17"), category: Category.vegetables, dateLabel: "Best By", qualityDate: getDate("2024-08-24"), notes: ""),
+            Item(name: "Carrots", purchasedDate: getDate("2024-08-17"), category: Category.vegetables, dateLabel: "Best By", qualityDate: getDate("2024-08-24"), notes: ""),
             Item(name: "Bread", purchasedDate: getDate("2024-08-17"), category: Category.grains, dateLabel: "Best By", qualityDate: getDate("2024-08-24"), notes: ""),
             Item(name: "Milk", purchasedDate: getDate("2024-08-19"), category: Category.dairy, dateLabel: "Best By", qualityDate: getDate("2024-08-28"), notes: "Costco")
         ]

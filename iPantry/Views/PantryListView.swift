@@ -22,6 +22,9 @@ struct PantryListView: View {
                     ContentUnavailableView("Add an item.", systemImage: "bag.fill")
                 } else {
                     List {
+                        CategoriesView()
+                            .listRowSeparator(.hidden)
+                            .padding(.leading, -4)
                         ForEach(items) { item in
                             NavigationLink(value: item) {
                                 HStack {
@@ -39,6 +42,7 @@ struct PantryListView: View {
                         }
                         .onDelete(perform: deleteItem)
                     }
+                    .listStyle(.plain)
                 }
             }
             .searchable(text: $searchTerm, placement: .navigationBarDrawer, prompt: "Search Pantry")

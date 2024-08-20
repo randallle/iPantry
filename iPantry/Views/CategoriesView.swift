@@ -29,6 +29,11 @@ struct CategoriesView: View {
                 Toggle(isOn: $allSelected) {
                     Text("All")
                 }
+//                .onChange(of: allSelected) {
+//                    categories.forEach { category in
+//                        categoryToggles[category] = false
+//                    }
+//                }
                 ForEach(categories, id: \.self) { category in
                     Toggle(isOn: Binding(
                         get: { categoryToggles[category] ?? false},
