@@ -33,7 +33,8 @@ struct PantryListView: View {
                             .padding(.leading)
                         }
                         .listRowSeparator(.hidden)
-                        .padding(.leading, -3)
+                        .listRowBackground(Color.clear)
+                        
                         ForEach(items) { item in
                             NavigationLink(value: item) {
                                 HStack {
