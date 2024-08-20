@@ -11,7 +11,7 @@ import SwiftUI
 struct CategoriesView: View {
     @Environment(\.modelContext) var modelContext
     @Query var categories: [Category]
-
+    
     @State private var allSelected: Bool = true
     @State private var categoryToggles: [Category: Bool] = [:]
     
@@ -26,6 +26,9 @@ struct CategoriesView: View {
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack {
+                Toggle(isOn: $allSelected) {
+                    Text("All")
+                }
                 ForEach(categories, id: \.self) { category in
                     Toggle(isOn: Binding(
                         get: { categoryToggles[category] ?? false},
@@ -35,10 +38,11 @@ struct CategoriesView: View {
                     )) {
                         Text(category.name)
                     }
-                    .toggleStyle(.button)
-                    .fontWeight(.semibold)
+                    
                 }
             }
+            .toggleStyle(.button)
+            .fontWeight(.semibold)
         }
     }
 }
