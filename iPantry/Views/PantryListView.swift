@@ -14,6 +14,7 @@ struct PantryListView: View {
     
     @State private var searchTerm = ""
     @State private var showingAddSheet = false
+    @State private var showingSortOptions = false
     
     var body: some View {
         NavigationStack {
@@ -22,9 +23,17 @@ struct PantryListView: View {
                     ContentUnavailableView("Add an item.", systemImage: "bag.fill")
                 } else {
                     List {
-                        CategoriesView()
-                            .listRowSeparator(.hidden)
-                            .padding(.leading, -4)
+                        HStack {
+                            CategoriesView()
+                            Button("Sort", systemImage: "arrow.up.arrow.down") {
+                                showingSortOptions.toggle()
+                            }
+                            .labelStyle(.iconOnly)
+                            .foregroundColor(.accentColor)
+                            .padding(.leading)
+                        }
+                        .listRowSeparator(.hidden)
+                        .padding(.leading, -3)
                         ForEach(items) { item in
                             NavigationLink(value: item) {
                                 HStack {
@@ -44,6 +53,13 @@ struct PantryListView: View {
                     }
                     .listStyle(.plain)
                 }
+            }
+            .confirmationDialog("Sort Options", isPresented: $showingSortOptions) {
+                Button("Quality Date") {}
+                Button("Date Purchased") {}
+                Button("Item Name") {}
+            } message: {
+                Text("Sort Options")
             }
             .searchable(text: $searchTerm, placement: .navigationBarDrawer, prompt: "Search Pantry")
             .navigationTitle("My Pantry")
