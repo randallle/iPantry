@@ -22,6 +22,7 @@
 		2C9CAFD02C6C7496004DBCCC /* PreviewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9CAFCF2C6C7496004DBCCC /* PreviewContainer.swift */; };
 		2C9CAFD22C726CC9004DBCCC /* CategorySamples.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9CAFD12C726CC9004DBCCC /* CategorySamples.swift */; };
 		2C9CAFD42C72D223004DBCCC /* ItemSamples.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9CAFD32C72D223004DBCCC /* ItemSamples.swift */; };
+		2C9CAFD62C75A379004DBCCC /* CategoriesEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9CAFD52C75A379004DBCCC /* CategoriesEditorView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +42,7 @@
 		2C9CAFCF2C6C7496004DBCCC /* PreviewContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewContainer.swift; sourceTree = "<group>"; };
 		2C9CAFD12C726CC9004DBCCC /* CategorySamples.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySamples.swift; sourceTree = "<group>"; };
 		2C9CAFD32C72D223004DBCCC /* ItemSamples.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemSamples.swift; sourceTree = "<group>"; };
+		2C9CAFD52C75A379004DBCCC /* CategoriesEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesEditorView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +113,7 @@
 				2C7AC6C92C61E485009E2388 /* PantryListView.swift */,
 				2C9CAFC72C699E4E004DBCCC /* ItemDetailsView.swift */,
 				2C9CAFC92C69AA14004DBCCC /* CreateCategoryView.swift */,
+				2C9CAFD52C75A379004DBCCC /* CategoriesEditorView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -206,6 +209,7 @@
 				2C9CAFD42C72D223004DBCCC /* ItemSamples.swift in Sources */,
 				2C7AC6B42C6187E5009E2388 /* iPantryApp.swift in Sources */,
 				2C9CAFC62C696BB8004DBCCC /* Category.swift in Sources */,
+				2C9CAFD62C75A379004DBCCC /* CategoriesEditorView.swift in Sources */,
 				2C9CAFC82C699E4E004DBCCC /* ItemDetailsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

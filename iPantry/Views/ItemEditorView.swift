@@ -72,6 +72,7 @@ struct ItemEditorView: View {
                             Text("Create category").tag("Create category")
                         }
                     }
+                    .pickerStyle(.navigationLink)
                     
                     DatePicker("Purchased Date", selection: $purchasedDate, in: ...Date(), displayedComponents: .date)
                 }

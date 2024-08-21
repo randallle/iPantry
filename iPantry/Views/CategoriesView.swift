@@ -9,7 +9,6 @@ import SwiftData
 import SwiftUI
 
 struct CategoriesView: View {
-    @Environment(\.modelContext) var modelContext
     @Query var categories: [Category]
     
     @State private var allSelected: Bool = true
