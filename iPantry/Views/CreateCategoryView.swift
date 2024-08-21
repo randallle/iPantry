@@ -12,10 +12,13 @@ struct CreateCategoryView: View {
     @Environment(\.modelContext) var modelContext
     @Environment(\.dismiss) var dismiss
     
+    @Binding private var selectedCategory: Category?
+    
     @State private var newCategoryName = ""
     @FocusState private var isTextFieldFocused: Bool
     
-    init() {
+    init(selectedCategory: Binding<Category?>) {
+        _selectedCategory = selectedCategory
         UITextField.appearance().clearButtonMode = .whileEditing
     }
     
@@ -55,7 +58,11 @@ struct CreateCategoryView: View {
 
 
 #Preview {
+    let preview = Preview(Category.self)
+    preview.addSamples(Category.sampleCategories)
+    
+    let samples = preview.getSamples(Category.self)
     return NavigationStack {
-        CreateCategoryView()
+        CreateCategoryView(selectedCategory: .constant(samples.first))
     }
 }

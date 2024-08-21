@@ -57,7 +57,7 @@ struct CategoriesEditorView: View {
                 .padding()
         }
         .sheet(isPresented: $showingAddCategorySheet) {
-            CreateCategoryView()
+            CreateCategoryView(selectedCategory: $selectedCategory)
         }
         .navigationTitle("Edit Category")
         .navigationBarTitleDisplayMode(.inline)
