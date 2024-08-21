@@ -55,24 +55,6 @@ struct ItemEditorView: View {
                 Section("Details") {
                     TextField("Name", text: $name)
                         .focused($isTextFieldFocused)
-                    
-//                    Picker("Category", selection: $category) {
-//                        // Section for "None"
-//                        Section {
-//                            Text("No Selection").tag(nil as Category?)
-//                        }
-//                        
-//                        Section {
-//                            ForEach(categories, id: \.self) { category in
-//                                Text(category.name).tag(category as Category?)
-//                            }
-//                        }
-//                        
-//                        Section {
-//                            Text("Create category").tag("Create category")
-//                        }
-//                    }
-//                    .pickerStyle(.navigationLink)
                     NavigationLink {
                         CategoriesEditorView(selectedCategory: $category)
                     } label: {
