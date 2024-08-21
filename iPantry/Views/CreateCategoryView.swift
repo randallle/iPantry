@@ -42,6 +42,7 @@ struct CreateCategoryView: View {
                         // more code
                         let newCategory = Category(name: newCategoryName)
                         modelContext.insert(newCategory)
+                        selectedCategory = newCategory
                         dismiss()
                     } label: {
                         Text("Save")
