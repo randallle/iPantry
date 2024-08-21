@@ -40,6 +40,7 @@ struct PantryListView: View {
                                 HStack {
                                     VStack(alignment: .leading, spacing: 5) {
                                         Text(item.name)
+                                            .font(.title3)
                                             .fontWeight(.semibold)
                                             .lineLimit(1)
                                         Text(item.daysRemaining != nil ? "Expires in \(item.daysRemaining!) days" : "No expiration provided")
