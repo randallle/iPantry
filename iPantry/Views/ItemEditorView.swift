@@ -56,23 +56,34 @@ struct ItemEditorView: View {
                     TextField("Name", text: $name)
                         .focused($isTextFieldFocused)
                     
-                    Picker("Category", selection: $category) {
-                        // Section for "None"
-                        Section {
-                            Text("No Selection").tag(nil as Category?)
-                        }
-                        
-                        Section {
-                            ForEach(categories, id: \.self) { category in
-                                Text(category.name).tag(category as Category?)
-                            }
-                        }
-                        
-                        Section {
-                            Text("Create category").tag("Create category")
+//                    Picker("Category", selection: $category) {
+//                        // Section for "None"
+//                        Section {
+//                            Text("No Selection").tag(nil as Category?)
+//                        }
+//                        
+//                        Section {
+//                            ForEach(categories, id: \.self) { category in
+//                                Text(category.name).tag(category as Category?)
+//                            }
+//                        }
+//                        
+//                        Section {
+//                            Text("Create category").tag("Create category")
+//                        }
+//                    }
+//                    .pickerStyle(.navigationLink)
+                    NavigationLink {
+                        CategoriesEditorView(selectedCategory: $category)
+                    } label: {
+                        HStack {
+                            Text("Category")
+                            Spacer()
+                            Text(category?.name ?? "None")
+                                .foregroundStyle(.secondary)
                         }
                     }
-                    .pickerStyle(.navigationLink)
+
                     
                     DatePicker("Purchased Date", selection: $purchasedDate, in: ...Date(), displayedComponents: .date)
                 }

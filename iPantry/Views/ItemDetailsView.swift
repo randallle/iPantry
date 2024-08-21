@@ -11,7 +11,6 @@ import SwiftUI
 struct ItemDetailsView: View {
     let item: Item
     
-    @State private var showingAddCategorySheet = false
     @State private var showingItemEditor = false
     
     var body: some View {
@@ -44,14 +43,9 @@ struct ItemDetailsView: View {
             Section("Notes") {
                 Text(item.notes)
             }
-            
-            Button("Create Category") { showingAddCategorySheet.toggle() }
         }
         .navigationTitle("Item Details")
         .navigationBarTitleDisplayMode(.inline)
-        .navigationDestination(isPresented: $showingAddCategorySheet){
-            CreateCategoryView()
-        }
         .scrollBounceBehavior(.basedOnSize)
         .toolbar {
             ToolbarItem(placement: .primaryAction) {

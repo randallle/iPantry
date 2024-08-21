@@ -20,32 +20,42 @@ struct CreateCategoryView: View {
     }
     
     var body: some View {
-        Form {
-            TextField("Category name", text: $newCategoryName)
-                .focused($isTextFieldFocused)
-        }
-        .navigationTitle("Create category")
-        .navigationBarTitleDisplayMode(.inline)
-        .toolbar {
-            ToolbarItem(placement: .confirmationAction) {
-                Button {
-                    // more code
-                    let newCategory = Category(name: newCategoryName)
-                    modelContext.insert(newCategory)
-                    dismiss()
-                } label: {
-                    Text("Save")
-                }
-                .disabled(newCategoryName.isEmpty)
+        NavigationStack {
+            Form {
+                TextField("Category name", text: $newCategoryName)
+                    .focused($isTextFieldFocused)
             }
-        }
-        .onAppear {
-            isTextFieldFocused = true
+            .navigationTitle("Create category")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button("Cancel") {
+                        dismiss()
+                    }
+                }
+                
+                ToolbarItem(placement: .confirmationAction) {
+                    Button {
+                        // more code
+                        let newCategory = Category(name: newCategoryName)
+                        modelContext.insert(newCategory)
+                        dismiss()
+                    } label: {
+                        Text("Save")
+                    }
+                    .disabled(newCategoryName.isEmpty)
+                }
+            }
+            .onAppear {
+                isTextFieldFocused = true
+            }
         }
     }
 }
 
 
 #Preview {
-    CreateCategoryView()
+    return NavigationStack {
+        CreateCategoryView()
+    }
 }
