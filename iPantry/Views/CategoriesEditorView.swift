@@ -12,11 +12,13 @@ struct CategoriesEditorView: View {
     @Environment(\.modelContext) var modelContext
     
     @Query private var categories: [Category]
+    @Query private var items: [Item]
     
     // Use binding to reference a state from the parent view
     @Binding var selectedCategory: Category?
     
     @State private var showingAddCategorySheet = false
+    @State private var showingDeleteConfirmation = false
     
     var body: some View {
         List {
@@ -68,7 +70,11 @@ struct CategoriesEditorView: View {
         for offset in offsets {
             let category = categories[offset]
             // Re-categorize items of the category to be deleted to be "Other"
-            
+            for item in items {
+                if item.category == category {
+                    item.category = Category(name: "Other")
+                }
+            }
             // Delete category from model
             modelContext.delete(category)
         }
