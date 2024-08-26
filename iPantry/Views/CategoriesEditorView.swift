@@ -38,10 +38,10 @@ struct CategoriesEditorView: View {
                         selectedCategory = category
                     }
                 }
-                .onDelete(perform: { indexSet in
+                .onDelete { indexSet in
                     selectedOffsets = indexSet
                     showingDeleteConfirmation.toggle()
-                })
+                }
             } header: {
                 Text("Select one")
             } footer: {

@@ -15,4 +15,6 @@ class Category: Identifiable, Hashable {
     init(name: String) {
         self.name = name
     }
+    
+    static let other = Category(name: "Other")
 }
