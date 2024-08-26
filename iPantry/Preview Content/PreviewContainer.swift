@@ -30,6 +30,13 @@ struct Preview {
     }
     
     @MainActor
+    func addSamplesAsync(_ samples: [any PersistentModel]) async {
+        samples.forEach { sample in
+            container.mainContext.insert(sample)
+        }
+    }
+    
+    @MainActor
     func getSamples<T: PersistentModel>(_ model: T.Type) -> [T] {
         let context = container.mainContext
         let request = FetchDescriptor<T>()

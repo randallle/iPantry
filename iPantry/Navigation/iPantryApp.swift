@@ -43,7 +43,7 @@ struct iPantryApp: App {
         do {
             let categories = try context.fetch(request)
             if categories.isEmpty {
-                let defaultCategories = ["Fruits", "Poultry", "Vegetables", "Baking"]
+                let defaultCategories = ["Fruits", "Poultry", "Vegetables", "Baking", "Other"]
                 for category in defaultCategories {
                     let newCategory = Category(name: category)
                     context.insert(newCategory)

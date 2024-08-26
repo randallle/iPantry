@@ -67,11 +67,13 @@ struct CategoriesEditorView: View {
     func deleteCategory(at offsets: IndexSet) {
         for offset in offsets {
             let category = categories[offset]
+            // Re-categorize items of the category to be deleted to be "Other"
+            
+            // Delete category from model
             modelContext.delete(category)
         }
     }
 }
-
 
 //#Preview {
 //    let preview = Preview(Category.self)
@@ -93,21 +95,21 @@ struct CategoriesEditorView_Previews: PreviewProvider {
         
         // Get the categories sample data from the preview setup
         var body: some View {
+            let preview = Preview(Category.self)
+            Task {
+                await preview.addSamplesAsync(Category.sampleCategories)
+            }
+            
             // Pass the state as a binding to the original view
-            CategoriesEditorView(selectedCategory: $selection)
-                .modelContainer(for: Category.self)
+            return CategoriesEditorView(selectedCategory: $selection)
+                .modelContainer(preview.container)
         }
     }
     
     static var previews: some View {
-        let preview = Preview(Category.self)
-        preview.addSamples(Category.sampleCategories)
-        let samples = preview.getSamples(Category.self)
-        
         // Use the wrapper view to manage the state
         return NavigationStack {
-            WrapperView(selection: samples.first)
-                .modelContainer(preview.container)
+            WrapperView()
         }
     }
 }

@@ -15,8 +15,9 @@ extension Category {
     static let vegetables = Category(name: "Vegetables")
     static let baking = Category(name: "Baking")
     static let grains = Category(name: "Grains")
+    static let other = Category(name: "Other")
     
     static var sampleCategories: [Category] {
-        [fruits, snacks, poultry, dairy, vegetables, baking, grains]
+        [fruits, snacks, poultry, dairy, vegetables, baking, grains, other]
     }
 }
