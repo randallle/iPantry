@@ -19,6 +19,7 @@ struct CategoriesEditorView: View {
     
     @State private var showingAddCategorySheet = false
     @State private var showingDeleteConfirmation = false
+    @State private var editingCategory: Category?
     @State private var selectedOffsets: IndexSet?
     
     var body: some View {
@@ -37,10 +38,16 @@ struct CategoriesEditorView: View {
                     .onTapGesture {
                         selectedCategory = category
                     }
-                }
-                .onDelete { indexSet in
-                    selectedOffsets = indexSet
-                    showingDeleteConfirmation.toggle()
+                    .swipeActions(allowsFullSwipe: false) {
+                        Button {
+                            editingCategory = category
+                            showingDeleteConfirmation.toggle()
+                        } label: {
+                            Label("Delete", systemImage: "trash")
+                        }
+                        .tint(category.name == "Other" ? .gray : .red)
+                        .disabled(category.name == "Other")
+                    }
                 }
             } header: {
                 Text("Select one")
@@ -66,45 +73,28 @@ struct CategoriesEditorView: View {
         }
         .navigationTitle("Edit Category")
         .navigationBarTitleDisplayMode(.inline)
-        .confirmationDialog("Are you sure you want to delete?", isPresented: $showingDeleteConfirmation, titleVisibility: .visible
-        ) {
+        .confirmationDialog("Are you sure you want to delete?", isPresented: $showingDeleteConfirmation, titleVisibility: .visible) {
             Button("Delete", role: .destructive) {
-                if let index = selectedOffsets?.first {
-                    deleteCategory(at: index)
+                if let deletion = editingCategory {
+                    deleteCategory(deletion)
                 }
             }
             Button("Cancel", role: .cancel) {}
-            
         }
-        
     }
     
-    func deleteCategory(at index: IndexSet.Element) {
-        let category = categories[index]
-        
+    func deleteCategory(_ category: Category) {
         // Re-categorize items of the category to be deleted to be "Other"
         for item in items {
             if item.category == category {
                 item.category = Category.other
             }
         }
+        
         // Delete category from model
         modelContext.delete(category)
     }
 }
-
-//#Preview {
-//    let preview = Preview(Category.self)
-//    preview.addSamples(Category.sampleCategories)
-//    let samples = preview.getSamples(Category.self)
-//
-//    @State var selection: Category? = samples.first
-//
-//    return NavigationStack {
-//        CategoriesEditorView(selectedCategory: $selection)
-//            .modelContainer(preview.container)
-//    }
-//}
 
 struct CategoriesEditorView_Previews: PreviewProvider {
     struct WrapperView: View {
