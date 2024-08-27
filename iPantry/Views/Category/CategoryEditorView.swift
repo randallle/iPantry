@@ -35,6 +35,15 @@ struct CategoryEditorView: View {
                 } footer: {
                     Text("Swipe to delete or rename a category")
                 }
+                .swipeActions(allowsFullSwipe: false) {
+                    Button("Delete", systemImage: "trash", role: .destructive) {
+                        // more code here
+                    }
+                    Button("Edit", systemImage: "square.and.pencil") {
+                        // more code here
+                    }
+                    .tint(.orange)
+                }
             }
             .navigationTitle("Edit categories")
             .navigationBarTitleDisplayMode(.inline)
