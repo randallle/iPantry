@@ -10,8 +10,9 @@ import SwiftUI
 
 struct CategoriesEditorView: View {
     @Environment(\.modelContext) var modelContext
+    @Environment(\.dismiss) var dismiss
     
-    @Query private var categories: [Category]
+    @Query(sort: [SortDescriptor(\Category.name, order: .forward)]) private var categories: [Category]
     @Query private var items: [Item]
     
     // Use binding to reference a state from the parent view
@@ -21,6 +22,13 @@ struct CategoriesEditorView: View {
     @State private var showingDeleteConfirmation = false
     @State private var editingCategory: Category?
     @State private var selectedOffsets: IndexSet?
+    
+    var otherCategory: Category {
+        guard let other = categories.first(where: { $0.name == "Other" }) else {
+            fatalError("Could not retrieve category \"Other\".")
+        }
+        return other
+    }
     
     var body: some View {
         List {
@@ -69,27 +77,32 @@ struct CategoriesEditorView: View {
                 .padding()
         }
         .sheet(isPresented: $showingAddCategorySheet) {
-            CreateCategoryView(selectedCategory: $selectedCategory)
+            // ondismiss
+            dismiss()
         }
-        .navigationTitle("Edit Category")
-        .navigationBarTitleDisplayMode(.inline)
-        .confirmationDialog("Are you sure you want to delete?", isPresented: $showingDeleteConfirmation, titleVisibility: .visible) {
-            Button("Delete", role: .destructive) {
-                if let deletion = editingCategory {
-                    deleteCategory(deletion)
-                }
+    content: {
+        CreateCategoryView(selectedCategory: $selectedCategory)
+    }
+    .navigationTitle("Edit Category")
+    .navigationBarTitleDisplayMode(.inline)
+    .confirmationDialog("Are you sure you want to delete?", isPresented: $showingDeleteConfirmation, titleVisibility: .visible) {
+        Button("Delete", role: .destructive) {
+            if let deletion = editingCategory {
+                deleteCategory(deletion)
             }
-            Button("Cancel", role: .cancel) {}
         }
+        Button("Cancel", role: .cancel) {}
+    }
     }
     
     func deleteCategory(_ category: Category) {
         // Re-categorize items of the category to be deleted to be "Other"
         for item in items {
             if item.category == category {
-                item.category = Category.other
+                item.category = otherCategory
             }
         }
+        selectedCategory = otherCategory
         
         // Delete category from model
         modelContext.delete(category)
