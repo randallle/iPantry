@@ -8,7 +8,7 @@
 import SwiftData
 import SwiftUI
 
-struct CategoriesEditorView: View {
+struct CategoryPickerView: View {
     @Environment(\.modelContext) var modelContext
     @Environment(\.dismiss) var dismiss
     
@@ -109,7 +109,7 @@ struct CategoriesEditorView: View {
     }
 }
 
-struct CategoriesEditorView_Previews: PreviewProvider {
+struct CategoryPickerView_Previews: PreviewProvider {
     struct WrapperView: View {
         // Manage the selection state here
         @State var selection: Category?
@@ -123,7 +123,7 @@ struct CategoriesEditorView_Previews: PreviewProvider {
             }
             
             // Pass the state as a binding to the original view
-            return CategoriesEditorView(selectedCategory: $selection)
+            return CategoryPickerView(selectedCategory: $selection)
                 .modelContainer(preview.container)
         }
     }
