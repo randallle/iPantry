@@ -17,6 +17,9 @@ struct OtherCategoryPickerView: View {
     // Use binding to reference a state from the parent view
     @Binding var selectedCategory: Category?
     
+    @State private var showingManageCategoryNameSheet: Bool = false
+    @State private var showingManageCategorySheet: Bool = false
+    
     init(selectedCategory: Binding<Category?>) {
         _selectedCategory = selectedCategory
     }
@@ -32,8 +35,12 @@ struct OtherCategoryPickerView: View {
             
             Section {
                 List {
-                    Button("Create Category") {}
-                    Button("Manage Categories") {}
+                    Button("Create Category") {
+                        showingManageCategoryNameSheet.toggle()
+                    }
+                    Button("Manage Categories") {
+                        showingManageCategorySheet.toggle()
+                    }
                 }
             } header: {
                 Text("More options")
@@ -41,6 +48,13 @@ struct OtherCategoryPickerView: View {
         }
         .navigationTitle("Select Category")
         .navigationBarTitleDisplayMode(.inline)
+        .sheet(isPresented: $showingManageCategoryNameSheet) {
+            ManageCategoryNameView(category: nil)
+        }
+        .sheet(isPresented: $showingManageCategorySheet) {
+            ManageCategoryView()
+        }
+        
     }
 }
 

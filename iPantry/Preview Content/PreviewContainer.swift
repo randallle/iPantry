@@ -49,4 +49,18 @@ struct Preview {
             return []
         }
     }
+    
+    @MainActor
+    func getSamplesAsync<T: PersistentModel>(_ model: T.Type) async -> [T]  {
+        let context = container.mainContext
+        let request = FetchDescriptor<T>()
+        
+        do {
+            let samples = try context.fetch(request)
+            return samples
+        } catch {
+            print("Failed to fetch model: \(error)")
+            return []
+        }
+    }
 }
