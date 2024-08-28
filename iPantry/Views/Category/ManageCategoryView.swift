@@ -13,8 +13,11 @@ struct ManageCategoryView: View {
     @Environment(\.dismiss) var dismiss
     
     @Query(sort: [SortDescriptor(\Category.name, order: .forward)]) private var categories: [Category]
+    @Query private var items: [Item]
     
     @State private var showingDeleteConfirmation: Bool = false
+    @State private var showingManageCategoryNameSheet: Bool = false
+    @State private var categoryToEdit: Category?
     
     var otherCategory: Category {
         guard let other = categories.first(where: { $0.name == "Other" }) else {
@@ -30,23 +33,26 @@ struct ManageCategoryView: View {
                     ForEach(categories, id: \.self) { category in
                         if category.name != "Other" {
                             Text(category.name)
+                                .swipeActions(allowsFullSwipe: false) {
+                                    Button("Delete", systemImage: "trash") {
+                                        categoryToEdit = category
+                                        showingDeleteConfirmation.toggle()
+                                    }
+                                    .tint(.red)
+                                    
+                                    Button("Edit", systemImage: "square.and.pencil") {
+                                        // more code here
+                                        categoryToEdit = category
+                                        showingManageCategoryNameSheet.toggle()
+                                    }
+                                    .tint(.orange)
+                                }
                         }
                     }
                 } header: {
                     Text("Categories")
                 } footer: {
                     Text("Swipe to delete or rename a category")
-                }
-                .swipeActions(allowsFullSwipe: false) {
-                    Button("Delete", systemImage: "trash") {
-                        // more code here
-                        showingDeleteConfirmation.toggle()
-                    }
-                    .tint(.red)
-                    Button("Edit", systemImage: "square.and.pencil") {
-                        // more code here
-                    }
-                    .tint(.orange)
                 }
             }
             .navigationTitle("Manage Categories")
@@ -58,15 +64,36 @@ struct ManageCategoryView: View {
                     }
                 }
             }
-            
-            
+            .confirmationDialog("Are you sure you want to delete \(categoryToEdit?.name ?? "")?", isPresented: $showingDeleteConfirmation, titleVisibility: .visible) {
+                Button("Delete", role: .destructive) {
+                    if let categoryToEdit {
+                        deleteCategory(categoryToEdit)
+                    }
+                }
+                Button("Cancel", role: .cancel) {}
+            }
+            .sheet(isPresented: $showingManageCategoryNameSheet) {
+                ManageCategoryNameView(category: categoryToEdit)
+            }
         }
+    }
+    
+    func deleteCategory(_ category: Category) {
+        // Re-categorize items of the category to be deleted to be "Other"
+        for item in items {
+            if item.category == category {
+                item.category = otherCategory
+            }
+        }
+        modelContext.delete(category)
     }
 }
 
 #Preview {
-    let preview = Preview(Category.self)
+    let preview = Preview(Category.self, Item.self)
     preview.addSamples(Category.sampleCategories)
+    preview.addSamples(Item.sampleItems)
+    
     return NavigationStack {
         ManageCategoryView()
             .modelContainer(preview.container)

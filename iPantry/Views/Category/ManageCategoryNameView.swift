@@ -12,17 +12,14 @@ struct ManageCategoryNameView: View {
     @Environment(\.dismiss) var dismiss
     
     @FocusState private var isTextFieldFocused: Bool
-    
-    @Binding private var selectedCategory: Category?
-    
+        
     @State private var categoryName: String
     
     let category: Category?
     
-    init(selectedCategory: Binding<Category?>, category: Category?) {
-        _selectedCategory = selectedCategory
-        _categoryName = State(initialValue: category?.name ?? "")
+    init(category: Category?) {
         self.category = category
+        _categoryName = State(initialValue: category?.name ?? "")
         UITextField.appearance().clearButtonMode = .whileEditing
     }
     
@@ -43,9 +40,8 @@ struct ManageCategoryNameView: View {
                 }
                 ToolbarItem(placement: .confirmationAction) {
                     Button {
-                        if let category = category {
-                            category.name = categoryName
-                            try? modelContext.save()
+                        if let category {
+                            category.name = categoryName.trimmingCharacters(in: .whitespaces)
                         } else {
                             let newCategory = Category(name: categoryName)
                             modelContext.insert(newCategory)
@@ -70,7 +66,7 @@ struct ManageCategoryNameView: View {
     
     let samples = preview.getSamples(Category.self)
     return NavigationStack {
-        ManageCategoryNameView(selectedCategory: .constant(samples.first), category: samples.first)
+        ManageCategoryNameView(category: samples.first)
             .modelContainer(preview.container)
     }
 }
