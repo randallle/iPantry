@@ -29,21 +29,23 @@ struct EditCategoryView: View {
                 TextField("Category name", text: $categoryName)
                     .focused($isTextFieldFocused)
             }
-        }
-        .navigationTitle("\(category == nil ? "Create" : "Edit") Category")
-        .navigationBarTitleDisplayMode(.inline)
-        .toolbar {
-            ToolbarItem(placement: .cancellationAction) {
-                Button("Cancel") {
-                    dismiss()
+            .scrollDisabled(true)
+            .navigationTitle("\(category == nil ? "Create" : "Edit") Category")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button("Cancel") {
+                        dismiss()
+                    }
                 }
-            }
-            ToolbarItem(placement: .confirmationAction) {
-                Button {
-                    // more code here
-                    dismiss()
-                } label: {
-                    Text("Save")
+                ToolbarItem(placement: .confirmationAction) {
+                    Button {
+                        // more code here
+                        dismiss()
+                    } label: {
+                        Text("Save")
+                    }
+                    .disabled(categoryName.isEmpty || categoryName == category?.name)
                 }
             }
         }
