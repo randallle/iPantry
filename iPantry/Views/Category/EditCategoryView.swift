@@ -40,7 +40,13 @@ struct EditCategoryView: View {
                 }
                 ToolbarItem(placement: .confirmationAction) {
                     Button {
-                        // more code here
+                        if let category = category {
+                            category.name = categoryName
+                            try? modelContext.save()
+                        } else {
+                            let newCategory = Category(name: categoryName)
+                            modelContext.insert(newCategory)
+                        }
                         dismiss()
                     } label: {
                         Text("Save")
