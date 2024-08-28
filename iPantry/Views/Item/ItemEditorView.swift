@@ -56,7 +56,7 @@ struct ItemEditorView: View {
                     TextField("Name", text: $name)
                         .focused($isTextFieldFocused)
                     NavigationLink {
-                        OtherCategoryPickerView(selectedCategory: $category)
+                        CategoryPickerView(selectedCategory: $category)
                     } label: {
                         HStack {
                             Text("Category")
