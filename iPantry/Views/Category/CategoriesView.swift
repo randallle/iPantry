@@ -9,7 +9,7 @@ import SwiftData
 import SwiftUI
 
 struct CategoriesView: View {
-    @Query var categories: [Category]
+    @Query(sort: [SortDescriptor(\Category.name, order: .forward)]) var categories: [Category]
     
     @State private var allSelected: Bool = true
     @State private var categoryToggles: [Category: Bool] = [:]
