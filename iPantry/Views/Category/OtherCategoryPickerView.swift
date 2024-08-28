@@ -49,10 +49,10 @@ struct OtherCategoryPickerView: View {
         .navigationTitle("Select Category")
         .navigationBarTitleDisplayMode(.inline)
         .sheet(isPresented: $showingManageCategoryNameSheet) {
-            ManageCategoryNameView(category: nil)
+            ManageCategoryNameView(selectedCategory: $selectedCategory, category: nil)
         }
         .sheet(isPresented: $showingManageCategorySheet) {
-            ManageCategoryView()
+            ManageCategoryView(selectedCategory: $selectedCategory)
         }
         
     }

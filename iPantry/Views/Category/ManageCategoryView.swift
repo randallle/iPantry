@@ -19,6 +19,12 @@ struct ManageCategoryView: View {
     @State private var showingManageCategoryNameSheet: Bool = false
     @State private var categoryToEdit: Category?
     
+    @Binding var selectedCategory: Category?
+    
+    init(selectedCategory: Binding<Category?>) {
+        _selectedCategory = selectedCategory
+    }
+    
     var otherCategory: Category {
         guard let other = categories.first(where: { $0.name == "Other" }) else {
             fatalError("Could not retrieve category \"Other\".")
@@ -45,7 +51,7 @@ struct ManageCategoryView: View {
                                         categoryToEdit = category
                                         showingManageCategoryNameSheet.toggle()
                                     }
-                                    .tint(.orange)
+                                    .tint(.yellow)
                                 }
                         }
                     }
@@ -73,7 +79,7 @@ struct ManageCategoryView: View {
                 Button("Cancel", role: .cancel) {}
             }
             .sheet(isPresented: $showingManageCategoryNameSheet) {
-                ManageCategoryNameView(category: categoryToEdit)
+                ManageCategoryNameView(selectedCategory: $selectedCategory, category: categoryToEdit)
             }
         }
     }
@@ -86,6 +92,8 @@ struct ManageCategoryView: View {
             }
         }
         modelContext.delete(category)
+        
+        selectedCategory = otherCategory
     }
 }
 
@@ -94,8 +102,10 @@ struct ManageCategoryView: View {
     preview.addSamples(Category.sampleCategories)
     preview.addSamples(Item.sampleItems)
     
+    let samples = preview.getSamples(Category.self)
+    
     return NavigationStack {
-        ManageCategoryView()
+        ManageCategoryView(selectedCategory: .constant(samples.first))
             .modelContainer(preview.container)
     }
 }

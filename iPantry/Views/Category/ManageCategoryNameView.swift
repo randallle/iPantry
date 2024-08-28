@@ -12,12 +12,16 @@ struct ManageCategoryNameView: View {
     @Environment(\.dismiss) var dismiss
     
     @FocusState private var isTextFieldFocused: Bool
+    
+    // Use binding to reference a state from the parent view
+    @Binding var selectedCategory: Category?
         
     @State private var categoryName: String
     
     let category: Category?
     
-    init(category: Category?) {
+    init(selectedCategory: Binding<Category?>, category: Category?) {
+        _selectedCategory = selectedCategory
         self.category = category
         _categoryName = State(initialValue: category?.name ?? "")
         UITextField.appearance().clearButtonMode = .whileEditing
@@ -45,6 +49,7 @@ struct ManageCategoryNameView: View {
                         } else {
                             let newCategory = Category(name: categoryName)
                             modelContext.insert(newCategory)
+                            selectedCategory = newCategory
                         }
                         dismiss()
                     } label: {
@@ -66,7 +71,7 @@ struct ManageCategoryNameView: View {
     
     let samples = preview.getSamples(Category.self)
     return NavigationStack {
-        ManageCategoryNameView(category: samples.first)
+        ManageCategoryNameView(selectedCategory: .constant(samples.first), category: samples.first)
             .modelContainer(preview.container)
     }
 }
