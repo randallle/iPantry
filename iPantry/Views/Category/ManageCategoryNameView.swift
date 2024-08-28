@@ -7,19 +7,22 @@
 
 import SwiftUI
 
-struct EditCategoryView: View {
+struct ManageCategoryNameView: View {
     @Environment(\.modelContext) var modelContext
     @Environment(\.dismiss) var dismiss
     
     @FocusState private var isTextFieldFocused: Bool
     
+    @Binding private var selectedCategory: Category?
+    
     @State private var categoryName: String
     
     let category: Category?
     
-    init(category: Category?) {
-        self.category = category
+    init(selectedCategory: Binding<Category?>, category: Category?) {
+        _selectedCategory = selectedCategory
         _categoryName = State(initialValue: category?.name ?? "")
+        self.category = category
         UITextField.appearance().clearButtonMode = .whileEditing
     }
     
@@ -67,7 +70,7 @@ struct EditCategoryView: View {
     
     let samples = preview.getSamples(Category.self)
     return NavigationStack {
-        EditCategoryView(category: samples.first)
+        ManageCategoryNameView(selectedCategory: .constant(samples.first), category: samples.first)
             .modelContainer(preview.container)
     }
 }
