@@ -13,8 +13,13 @@ struct OtherCategoryPickerView: View {
     @Environment(\.dismiss) var dismiss
     
     @Query(sort: [SortDescriptor(\Category.name, order: .forward)]) private var categories: [Category]
+        
+    // Use binding to reference a state from the parent view
+    @Binding var selectedCategory: Category?
     
-    @State private var selectedCategory: Category?
+    init(selectedCategory: Binding<Category?>) {
+        _selectedCategory = selectedCategory
+    }
     
     var body: some View {
         Form {
@@ -46,8 +51,10 @@ struct OtherCategoryPickerView: View {
         await preview.addSamplesAsync(Item.sampleItems)
     }
     
+    let samples = preview.getSamples(Category.self)
+    
     return NavigationStack {
-        OtherCategoryPickerView()
+        OtherCategoryPickerView(selectedCategory: .constant(samples.first))
             .modelContainer(preview.container)
     }
 }
