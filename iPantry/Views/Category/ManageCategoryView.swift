@@ -8,11 +8,13 @@
 import SwiftData
 import SwiftUI
 
-struct CategoryEditorView: View {
+struct ManageCategoryView: View {
     @Environment(\.modelContext) var modelContext
     @Environment(\.dismiss) var dismiss
     
     @Query(sort: [SortDescriptor(\Category.name, order: .forward)]) private var categories: [Category]
+    
+    @State private var showingDeleteConfirmation: Bool = false
     
     var otherCategory: Category {
         guard let other = categories.first(where: { $0.name == "Other" }) else {
@@ -36,16 +38,18 @@ struct CategoryEditorView: View {
                     Text("Swipe to delete or rename a category")
                 }
                 .swipeActions(allowsFullSwipe: false) {
-                    Button("Delete", systemImage: "trash", role: .destructive) {
+                    Button("Delete", systemImage: "trash") {
                         // more code here
+                        showingDeleteConfirmation.toggle()
                     }
+                    .tint(.red)
                     Button("Edit", systemImage: "square.and.pencil") {
                         // more code here
                     }
                     .tint(.orange)
                 }
             }
-            .navigationTitle("Edit categories")
+            .navigationTitle("Manage Categories")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
@@ -64,7 +68,7 @@ struct CategoryEditorView: View {
     let preview = Preview(Category.self)
     preview.addSamples(Category.sampleCategories)
     return NavigationStack {
-        CategoryEditorView()
+        ManageCategoryView()
             .modelContainer(preview.container)
     }
 }
