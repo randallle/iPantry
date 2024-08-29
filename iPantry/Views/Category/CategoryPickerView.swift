@@ -32,20 +32,37 @@ struct CategoryPickerView: View {
                 }
             }
             .pickerStyle(.inline)
-            
-            Section {
-                List {
-                    Button("Create Category") {
-                        showingManageCategoryNameSheet.toggle()
-                    }
-                    Button("Manage Categories") {
-                        showingManageCategorySheet.toggle()
-                    }
-                }
-            } header: {
-                Text("More options")
+        }
+        Group {
+            Button {
+                showingManageCategoryNameSheet.toggle()
+            } label: {
+                Text("Create Category")
+                    .fontWeight(.bold)
+                    .foregroundColor(.white)
+                    .padding()
+                    .frame(maxWidth: .infinity)
+                    .background(Color.accentColor) // Use the accent color for a prominent look
+                    .cornerRadius(15)
+                    .padding(.horizontal)
+                    .padding(.top, 10)
+            }
+            Button {
+                showingManageCategorySheet.toggle()
+            } label: {
+                Text("Manage Categories")
+                    .fontWeight(.bold)
+                    .foregroundColor(.white)
+                    .padding()
+                    .frame(maxWidth: .infinity)
+                    .background(Color.accentColor) // Use the accent color for a prominent look
+                    .cornerRadius(15)
+                    .padding(.horizontal)
+                    .padding(.top, 10)
             }
         }
+        
+        
         .navigationTitle("Select Category")
         .navigationBarTitleDisplayMode(.inline)
         .sheet(isPresented: $showingManageCategoryNameSheet) {

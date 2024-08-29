@@ -88,9 +88,6 @@ struct PantryListView: View {
                     Button("Add Item", systemImage: "plus") {
                         showingAddSheet.toggle()
                     }
-                    .sheet(isPresented: $showingAddSheet) {
-                        ItemEditorView(item: nil)
-                    }
                 }
             }
             .confirmationDialog("Are you sure you want to delete \(itemToEdit?.name ?? "")?", isPresented: $showingDeleteConfirmation, titleVisibility: .visible) {
@@ -103,6 +100,9 @@ struct PantryListView: View {
             }
             .sheet(isPresented: $showingItemEditor) {
                 ItemEditorView(item: itemToEdit)
+            }
+            .sheet(isPresented: $showingAddSheet) {
+                ItemEditorView(item: nil)
             }
         }
     }
