@@ -15,6 +15,9 @@ struct PantryListView: View {
     @State private var searchTerm = ""
     @State private var showingAddSheet = false
     @State private var showingSortOptions = false
+    @State private var showingDeleteConfirmation = false
+    @State private var showingItemEditor = false
+    @State private var itemToEdit: Item?
     
     var body: some View {
         NavigationStack {
@@ -50,8 +53,20 @@ struct PantryListView: View {
                                     }
                                 }
                             }
+                            .swipeActions(allowsFullSwipe: false) {
+                                Button("Delete", systemImage: "trash") {
+                                    itemToEdit = item
+                                    showingDeleteConfirmation.toggle()
+                                }
+                                .tint(.red)
+                                
+                                Button("Edit", systemImage: "square.and.pencil") {
+                                    itemToEdit = item
+                                    showingItemEditor.toggle()
+                                }
+                                .tint(.yellow)
+                            }
                         }
-                        .onDelete(perform: deleteItem)
                     }
                     .listStyle(.plain)
                 }
@@ -81,15 +96,22 @@ struct PantryListView: View {
                     }
                 }
             }
-            
+            .confirmationDialog("Are you sure you want to delete \(itemToEdit?.name ?? "")?", isPresented: $showingDeleteConfirmation, titleVisibility: .visible) {
+                Button("Delete", role: .destructive) {
+                    if let itemToEdit {
+                        deleteItem(itemToEdit)
+                    }
+                }
+                Button("Cancel", role: .cancel) {}
+            }
+            .sheet(isPresented: $showingItemEditor) {
+                ItemEditorView(item: itemToEdit)
+            }
         }
     }
     
-    func deleteItem(at offsets: IndexSet) {
-        for offset in offsets {
-            let item = items[offset]
-            modelContext.delete(item)
-        }
+    func deleteItem(_ item: Item) {
+        modelContext.delete(item)
     }
 }
 
