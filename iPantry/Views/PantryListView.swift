@@ -84,9 +84,6 @@ struct PantryListView: View {
                 ItemDetailsView(item: item)
             }
             .toolbar {
-                ToolbarItem(placement: .topBarLeading) {
-                    EditButton()
-                }
                 ToolbarItem(placement: .primaryAction) {
                     Button("Add Item", systemImage: "plus") {
                         showingAddSheet.toggle()
