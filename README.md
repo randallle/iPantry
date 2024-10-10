@@ -3,9 +3,4 @@
 
 # Demo
 
-https://github.com/user-attachments/assets/c26dbd98-605d-4227-afaf-ce997bf7ea7e
-
-<video width="300" controls>
-  <source src="[video-file.mp4](https://github.com/user-attachments/assets/c26dbd98-605d-4227-afaf-ce997bf7ea7e)" type="video/mp4">
-</video>
-
+https://github.com/user-attachments/assets/bac13df9-52aa-40a8-bb5b-46cdad787b28
